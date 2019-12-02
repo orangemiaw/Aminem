@@ -9,6 +9,8 @@ public class SessionManager {
     public static final String SP_AOE_APP       = "spAmikomOnlineExamApp";
     public static final String SP_TOKEN         = "spToken";
     public static final String SP_USER_ID       = "spUserId";
+    public static final String SP_USER_NAME     = "spUserName";
+    public static final String SP_USER_NIM      = "spUserNim";
     public static final String SP_SUDAH_LOGIN   = "spSudahLogin";
     public static final String SP_IMAGE_SLIDER  = "";
 
@@ -45,9 +47,19 @@ public class SessionManager {
         return sp.getString(SP_IMAGE_SLIDER, "");
     }
 
-    public Integer getSPUserId(){
+    public String getSPUserId(){
 
-        return sp.getInt(SP_USER_ID, 0);
+        return sp.getString(SP_USER_ID, "");
+    }
+
+    public String getSPUserName(){
+
+        return sp.getString(SP_USER_NAME, "");
+    }
+
+    public String getSPUserNim(){
+
+        return sp.getString(SP_USER_NIM, "");
     }
 
     public Boolean getSPSudahLogin(){

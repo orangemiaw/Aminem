@@ -5,11 +5,13 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.xhat.aminem.Model.AlllostitemItem;
+import com.xhat.aminem.Module.GlideApp;
 import com.xhat.aminem.R;
 
 import java.util.List;
@@ -54,12 +56,18 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
     public void onBindViewHolder(LostItemAdapter.LostItemHolder holder, int position) {
         final AlllostitemItem alllostitemItem = allLostItemList.get(position);
         holder.tvItemName.setText(alllostitemItem.getItemName());
-        holder.tvItemFound.setText(alllostitemItem.getPlaceFound());
+        holder.tvItemFound.setText("Ditemukan di " + alllostitemItem.getPlaceFound());
+        holder.btnCategory.setText(alllostitemItem.getCategory());
+
+        GlideApp
+                .with(mContext)
+                .load(alllostitemItem.getImage())
+                .into(holder.ivItemDrawable);
 
         String itemName = alllostitemItem.getItemName();
-        String firstCharNamaDosen = itemName.substring(0,1);
+        String firstCharItemNama = itemName.substring(0,1).toUpperCase();
         TextDrawable drawable = TextDrawable.builder()
-                .buildRound(firstCharNamaDosen, getColor());
+                .buildRound(firstCharItemNama, getColor());
         holder.ivTextDrawable.setImageDrawable(drawable);
     }
 
@@ -70,6 +78,8 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
 
     public class LostItemHolder extends RecyclerView.ViewHolder{
         ImageView ivTextDrawable;
+        ImageView ivItemDrawable;
+        Button btnCategory;
         TextView tvItemName;
         TextView tvItemFound;
 
@@ -77,6 +87,8 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
             super(itemView);
 
             ivTextDrawable = itemView.findViewById(R.id.iv_text_drawable);
+            ivItemDrawable = itemView.findViewById(R.id.iv_item_drawable);
+            btnCategory = itemView.findViewById(R.id.btn_category);
             tvItemName = itemView.findViewById(R.id.tv_item_name);
             tvItemFound = itemView.findViewById(R.id.tv_item_found);
 

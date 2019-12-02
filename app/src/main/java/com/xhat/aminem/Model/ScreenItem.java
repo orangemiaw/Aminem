@@ -1,6 +1,6 @@
-package com.xhat.aminem;
+package com.xhat.aminem.Model;
 
-class ScreenItem {
+public class ScreenItem {
 
     String Title, Description;
     int ScreenImg;

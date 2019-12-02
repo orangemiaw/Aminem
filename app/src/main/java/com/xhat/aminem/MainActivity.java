@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
@@ -19,6 +21,7 @@ import com.xhat.aminem.Fragment.HistoryFragment;
 import com.xhat.aminem.Fragment.HomeFragment;
 import com.xhat.aminem.Fragment.ProfileFragment;
 import com.xhat.aminem.Fragment.SearchFragment;
+import com.xhat.aminem.Utils.Constant;
 import com.xhat.aminem.Utils.Helper;
 import com.xhat.aminem.Utils.SessionManager;
 
@@ -98,10 +101,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.log_activity:
-                startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
+                startActivity(new Intent(mContext, LogActivity.class));
                 break;
             case R.id.about:
-                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                startActivity(new Intent(mContext, AboutActivity.class));
+                break;
+            case R.id.community:
+                String appName = "org.telegram.messenger";
+                boolean isAppInstalled = Helper.isAppAvailable(mContext, appName);
+                if (isAppInstalled) {
+                    Intent telegram = new Intent(Intent.ACTION_VIEW, Uri.parse(Constant.TELEGRAM_URL_GROUP));
+                    telegram.setPackage(appName);
+                    startActivity(telegram);
+                } else {
+                    startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(Constant.TELEGRAM_URL_GROUP)));
+                }
                 break;
             case R.id.logout:
                 Helper.clearSession(mContext);

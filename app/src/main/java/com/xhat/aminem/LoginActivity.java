@@ -114,11 +114,16 @@ public class LoginActivity extends AppCompatActivity {
                                 String AuthTokenType = jsonRESULTS.getJSONObject("data").getString("token_type");
 
                                 if (AuthToken != null){
-                                    Toast.makeText(mContext, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                    //showAlertDialog("Success", "Login Successfully");
+                                    // Toast.makeText(mContext, "Login Successfully", Toast.LENGTH_SHORT).show();
                                     String UserId = jsonRESULTS.getJSONObject("data").getString("access_id");
+                                    String UserNim = jsonRESULTS.getJSONObject("data").getJSONObject("profile_info").getString("nim");
+                                    String UserName = jsonRESULTS.getJSONObject("data").getJSONObject("profile_info").getString("name");
+
+                                    Log.d("USER_NIM", UserNim);
+                                    Log.d("USER_NAME", UserName);
 
                                     sessionManager.saveSPString(SessionManager.SP_USER_ID, UserId);
+                                    sessionManager.saveSPString(SessionManager.SP_USER_NAME, UserName);
                                     sessionManager.saveSPString(SessionManager.SP_TOKEN, AuthTokenType + " " + AuthToken);
                                     sessionManager.saveSPBoolean(SessionManager.SP_SUDAH_LOGIN, true);
 
@@ -126,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    //Toast.makeText(mContext, "Login failed, something when wrong", Toast.LENGTH_SHORT).show();
                                     Helper.showAlertDialog(mContext,"Error", "Login failed, something when wrong");
                                 }
                             } catch (JSONException e) {

@@ -1,4 +1,4 @@
-package com.xhat.aminem;
+package com.xhat.aminem.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xhat.aminem.Model.ScreenItem;
+import com.xhat.aminem.R;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-class IntroViewPagerAdapter extends PagerAdapter {
+public class IntroViewPagerAdapter extends PagerAdapter {
 
     Context mContext ;
     List<ScreenItem> mListScreen;

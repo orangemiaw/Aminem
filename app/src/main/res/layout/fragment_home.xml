@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#fcfcfc"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.HomeFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,6 +24,7 @@
                 android:text="Selamat Datang,"/>
 
             <TextView
+                android:id="@+id/tv_profile_name"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#2d2d2d"
@@ -42,7 +42,7 @@
                 android:elevation="6dp"/>
 
             <TextView
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#2d2d2d"
                 android:layout_width="match_parent"
@@ -62,8 +62,7 @@
                     android:clickable="true"
                     android:id="@+id/bankcardId"
                     android:layout_width="110dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="10dp">
+                    android:layout_height="120dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -227,11 +226,13 @@
             </LinearLayout>
 
             <TextView
-                android:textSize="16sp"
+                android:id="@+id/tv_last_find"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#2d2d2d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:text="Berita Penemuan Terbaru" />
 
             <TextView
@@ -245,10 +246,17 @@
                 android:id="@+id/rv_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="16dp">
             </androidx.recyclerview.widget.RecyclerView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="50dp"/>
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

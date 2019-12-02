@@ -33,11 +33,14 @@ import com.xhat.aminem.Adapter.LostItemAdapter;
 import com.xhat.aminem.LoginActivity;
 import com.xhat.aminem.Model.AlllostitemItem;
 import com.xhat.aminem.Model.ResponseLostItem;
+import com.xhat.aminem.PostActivity;
 import com.xhat.aminem.Utils.Api.BaseApiService;
 import com.xhat.aminem.Utils.Api.UtilsApi;
 import com.xhat.aminem.Module.GlideApp;
 import com.xhat.aminem.R;
+import com.xhat.aminem.Utils.Constant;
 import com.xhat.aminem.Utils.Helper;
+import com.xhat.aminem.Utils.RecyclerItemClickListener;
 import com.xhat.aminem.Utils.SessionManager;
 
 import org.json.JSONArray;
@@ -51,7 +54,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     ViewFlipper vfBanner;
     RecyclerView rvItem;
-    TextView tvEmpty;
+    TextView tvProfileName, tvEmpty, tvLastFound;
 
     ProgressDialog loading;
     ArrayList<String> imageUrl = new ArrayList<>();
@@ -70,21 +73,27 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         vfBanner = view.findViewById(R.id.vf_banner);
         rvItem = view.findViewById(R.id.rv_item);
+        tvProfileName = view.findViewById(R.id.tv_profile_name);
         tvEmpty = view.findViewById(R.id.tv_empty);
+        tvLastFound = view.findViewById(R.id.tv_last_find);
 
-        //ButterKnife.bind(this, view);
         mContext = getContext();
         mApiService = UtilsApi.getAPIService();
         sessionManager = new SessionManager(mContext);
+
+        // Set welcome name
+        Log.d("PROFILE_NAME", sessionManager.getSPUserName());
+        tvProfileName.setText(sessionManager.getSPUserName());
 
         lostItemAdapter = new LostItemAdapter(mContext, alllostitemItemList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         rvItem.setLayoutManager(mLayoutManager);
         rvItem.setItemAnimator(new DefaultItemAnimator());
 
-        // Load data lodt item
+        // Load data lost item
         getDataItem();
 
         // Load slider image from server
@@ -109,7 +118,9 @@ public class HomeFragment extends Fragment {
                     public void onResponse(Call<ResponseLostItem> call, Response<ResponseLostItem> response) {
                         if (response.isSuccessful()) {
                             loading.dismiss();
-                            if (response.body().isError()) {
+                            tvLastFound.setVisibility(View.VISIBLE);
+
+                            if (response.body().isError() || response.body() == null) {
                                 tvEmpty.setVisibility(View.VISIBLE);
                             } else {
                                 final List<AlllostitemItem> alllostitemItems = response.body().getAlllostitem();

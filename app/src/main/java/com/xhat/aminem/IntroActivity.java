@@ -1,6 +1,5 @@
 package com.xhat.aminem;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.xhat.aminem.Adapter.IntroViewPagerAdapter;
+import com.xhat.aminem.Model.ScreenItem;
 
 import java.util.ArrayList;
 import java.util.List;
