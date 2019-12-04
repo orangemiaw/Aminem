@@ -20,9 +20,9 @@ public interface BaseApiService {
     @GET("slider?status=1")
     Call<ResponseBody> getSlider(@Header("Authorization") String authToken);
 
-    @GET("lost_item?order_by=DESC&status=1&data_per_page=5")
+    @GET("lost_item?order=DESC&status=1&data_per_page=5")
     Call<ResponseLostItem> getLastItemLost(@Header("Authorization") String authToken);
 
-    @GET("change_log?order_by=DESC")
+    @GET("change_log?order=DESC")
     Call<ResponseLogItem> getLogActivity(@Header("Authorization") String authToken);
 }

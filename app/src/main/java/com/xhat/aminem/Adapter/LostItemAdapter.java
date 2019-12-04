@@ -2,6 +2,8 @@ package com.xhat.aminem.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,18 +59,42 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
         final AlllostitemItem alllostitemItem = allLostItemList.get(position);
         holder.tvItemName.setText(alllostitemItem.getItemName());
         holder.tvItemFound.setText("Ditemukan di " + alllostitemItem.getPlaceFound());
-        holder.btnCategory.setText(alllostitemItem.getCategory());
+//        holder.btnCategory.setText(alllostitemItem.getCategory());
 
         GlideApp
                 .with(mContext)
                 .load(alllostitemItem.getImage())
                 .into(holder.ivItemDrawable);
 
-        String itemName = alllostitemItem.getItemName();
-        String firstCharItemNama = itemName.substring(0,1).toUpperCase();
+        String itemName = alllostitemItem.getCategory();
+        String firstCharItemNama = itemName.substring(0,2).toUpperCase();
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(firstCharItemNama, getColor());
         holder.ivTextDrawable.setImageDrawable(drawable);
+
+//        String category = alllostitemItem.getCategory();
+//        Log.d("CATEGORY", category);
+//
+//        switch (category) {
+//            case "Kartu Identitas":
+//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_lightbulb_outline_black_24dp));
+//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundyello));
+//            case "Dokumen":
+//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_attach_file_black_24dp));
+//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundpink));
+//            case "Kunci":
+//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_key_white));
+//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundgreen));
+//            case "Elektronik":
+//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_electronic_white));
+//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundgreen));
+//            case "Dompet":
+//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_attach_money_black_24dp));
+//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundyello));
+//            case "Lainnya":
+//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_other_white));
+//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundpink));
+//        }
     }
 
     @Override
@@ -79,7 +105,7 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
     public class LostItemHolder extends RecyclerView.ViewHolder{
         ImageView ivTextDrawable;
         ImageView ivItemDrawable;
-        Button btnCategory;
+//        Button btnCategory;
         TextView tvItemName;
         TextView tvItemFound;
 
@@ -88,7 +114,7 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
 
             ivTextDrawable = itemView.findViewById(R.id.iv_text_drawable);
             ivItemDrawable = itemView.findViewById(R.id.iv_item_drawable);
-            btnCategory = itemView.findViewById(R.id.btn_category);
+//            btnCategory = itemView.findViewById(R.id.btn_category);
             tvItemName = itemView.findViewById(R.id.tv_item_name);
             tvItemFound = itemView.findViewById(R.id.tv_item_found);
 

@@ -12,9 +12,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xhat.aminem.Adapter.LogItemAdapter;
@@ -30,7 +32,8 @@ import java.util.List;
 
 public class LogActivity extends AppCompatActivity {
     RecyclerView rvLog;
-    TextView tvEmpty;
+    TextView tvEmpty, tvErrorSorry, tvErrorHi, tvInfo;
+    ImageView ivError;
     ProgressDialog loading;
 
     Context mContext;
@@ -57,7 +60,11 @@ public class LogActivity extends AppCompatActivity {
         sessionManager = new SessionManager(mContext);
 
         rvLog = findViewById(R.id.rv_log);
-        tvEmpty = findViewById(R.id.tv_log_empty);
+        ivError = findViewById(R.id.iv_error);
+        tvEmpty = findViewById(R.id.tv_empty);
+        tvErrorHi = findViewById(R.id.tv_error_hi);
+        tvErrorSorry = findViewById(R.id.tv_error_sorry);
+        tvInfo = findViewById(R.id.tv_error_info);
 
         if (!sessionManager.getSPSudahLogin()){
             startActivity(new Intent(mContext, LoginActivity.class));
@@ -82,6 +89,8 @@ public class LogActivity extends AppCompatActivity {
                             loading.dismiss();
 
                             if (response.body().isError() || response.body() == null) {
+                                ivError.setVisibility(View.VISIBLE);
+                                tvErrorHi.setVisibility(View.VISIBLE);
                                 tvEmpty.setVisibility(View.VISIBLE);
                             } else {
                                 final List<LogItem> logItemLists = response.body().getLogitem();
@@ -90,13 +99,20 @@ public class LogActivity extends AppCompatActivity {
                             }
                         } else {
                             loading.dismiss();
-                            Helper.showAlertDialog(mContext,"Error", "Failed to load latest log activity");
+                            Helper.clearSession(mContext);
+                            startActivity(new Intent(mContext, LoginActivity.class));
+                            Helper.showAlertDialog(mContext,"Error", "Your must login again becaouse session expired");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseLogItem> call, Throwable t) {
                         loading.dismiss();
+                        ivError.setVisibility(View.VISIBLE);
+                        tvErrorSorry.setVisibility(View.VISIBLE);
+                        tvInfo.setVisibility(View.VISIBLE);
+
+                        Log.e("debug", "onFailure: ERROR > " + t.toString());
                         Helper.showTimeOut(mContext);
                     }
                 });

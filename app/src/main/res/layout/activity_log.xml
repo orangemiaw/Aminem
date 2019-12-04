@@ -7,13 +7,6 @@
     android:orientation="vertical"
     tools:context=".LogActivity">
 
-    <TextView
-        android:id="@+id/tv_log_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="No record found."/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_log"
         android:layout_width="match_parent"
@@ -22,4 +15,63 @@
         android:paddingRight="8dp"
         android:paddingTop="16dp">
     </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/iv_error"
+        android:visibility="gone"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/img2" />
+
+    <TextView
+        android:id="@+id/tv_error_sorry"
+        android:visibility="gone"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#2d2d2d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textAlignment="center"
+        android:text="Sorry Guys"/>
+
+    <TextView
+        android:id="@+id/tv_error_hi"
+        android:visibility="gone"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#2d2d2d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textAlignment="center"
+        android:text="Hi Guys"/>
+
+    <TextView
+        android:id="@+id/tv_error_info"
+        android:visibility="gone"
+        android:textSize="14sp"
+        android:textColor="#2d2d2d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textAlignment="center"
+        android:text="Failed to get data from server for some reason."/>
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:visibility="gone"
+        android:textSize="14sp"
+        android:textColor="#2d2d2d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textAlignment="center"
+        android:text="No log activity record found."/>
 </LinearLayout>

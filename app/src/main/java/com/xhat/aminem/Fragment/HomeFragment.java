@@ -31,6 +31,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.xhat.aminem.Adapter.LostItemAdapter;
 import com.xhat.aminem.LoginActivity;
+import com.xhat.aminem.LostItemDetailActivity;
 import com.xhat.aminem.Model.AlllostitemItem;
 import com.xhat.aminem.Model.ResponseLostItem;
 import com.xhat.aminem.PostActivity;
@@ -85,7 +86,6 @@ public class HomeFragment extends Fragment {
         sessionManager = new SessionManager(mContext);
 
         // Set welcome name
-        Log.d("PROFILE_NAME", sessionManager.getSPUserName());
         tvProfileName.setText(sessionManager.getSPUserName());
 
         lostItemAdapter = new LostItemAdapter(mContext, alllostitemItemList);
@@ -116,9 +116,10 @@ public class HomeFragment extends Fragment {
                 .enqueue(new Callback<ResponseLostItem>() {
                     @Override
                     public void onResponse(Call<ResponseLostItem> call, Response<ResponseLostItem> response) {
+                        tvLastFound.setVisibility(View.VISIBLE);
+
                         if (response.isSuccessful()) {
                             loading.dismiss();
-                            tvLastFound.setVisibility(View.VISIBLE);
 
                             if (response.body().isError() || response.body() == null) {
                                 tvEmpty.setVisibility(View.VISIBLE);
@@ -127,40 +128,48 @@ public class HomeFragment extends Fragment {
                                 rvItem.setAdapter(new LostItemAdapter(mContext, alllostitemItems));
                                 lostItemAdapter.notifyDataSetChanged();
 
-                                // initDataIntent(alllostitemItems);
+                                initDataIntent(alllostitemItems);
                             }
                         } else {
                             loading.dismiss();
-                            tvEmpty.setVisibility(View.VISIBLE);
-                            Helper.showAlertDialog(mContext,"Error", "Failed to load latest lost item");
+                            Helper.clearSession(mContext);
+                            startActivity(new Intent(mContext, LoginActivity.class));
+                            Helper.showAlertDialog(mContext,"Error", "Your must login again becaouse session expired");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseLostItem> call, Throwable t) {
                         loading.dismiss();
+                        Log.e("debug", "onFailure: ERROR > " + t.toString());
                         Helper.showTimeOut(mContext);
                     }
                 });
     }
 
-//    private void initDataIntent(final List<AlllostitemItem> alllostitemItemList){
-//        rvItem.addOnItemTouchListener( new RecyclerView.SimpleOnItemTouchListener().onTouchEvent();
-//        new RecyclerItemClickListener(mContext, new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        String id = alllostitemItemList.get(position).getId();
-//                        String name = alllostitemItemList.get(position).getItemName();
-//                        String found = alllostitemItemList.get(position).getPlaceFound();
-//
-//                        Intent detailItem = new Intent(mContext, PostActivity.class); // sementara
-//                        detailItem.putExtra(Constant.KEY_ID_ITEM, id);
-//                        detailItem.putExtra(Constant.KEY_ITEM_NAME, name);
-//                        detailItem.putExtra(Constant.KEY_ITEM_FOUND, found);
-//                        startActivity(detailItem);
-//                    }
-//                }));
-//    }
+    private void initDataIntent(final List<AlllostitemItem> alllostitemItemList){
+        rvItem.addOnItemTouchListener(
+        new RecyclerItemClickListener(mContext, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        String id = alllostitemItemList.get(position).getId();
+                        String name = alllostitemItemList.get(position).getItemName();
+                        String image = alllostitemItemList.get(position).getImage();
+                        String found = alllostitemItemList.get(position).getPlaceFound();
+                        String save = alllostitemItemList.get(position).getPlaceSaveName();
+                        String desc = alllostitemItemList.get(position).getDescription();
+
+                        Intent detailItem = new Intent(mContext, LostItemDetailActivity.class); // sementara
+                        detailItem.putExtra(Constant.KEY_ID_ITEM, id);
+                        detailItem.putExtra(Constant.KEY_ITEM_NAME, name);
+                        detailItem.putExtra(Constant.KEY_ITEM_IMAGE, image);
+                        detailItem.putExtra(Constant.KEY_ITEM_FOUND, "Ditemukan di " + found);
+                        detailItem.putExtra(Constant.KEY_ITEM_SAVE, "Dapat diambil di " + save);
+                        detailItem.putExtra(Constant.KEY_ITEM_DESC, desc);
+                        startActivity(detailItem);
+                    }
+                }));
+    }
 
     private void getSlider() {
         mApiService.getSlider(sessionManager.getSPToken())
@@ -201,7 +210,6 @@ public class HomeFragment extends Fragment {
                                 String error_message = jsonResults.getString("message");
                                 Integer error_code = jsonResults.getInt("code");
 
-                                Log.e("debug", error_message);
                                 Helper.showAlertDialog(mContext,"Error", error_message);
 
                                 if(error_code == 401) {
