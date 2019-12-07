@@ -61,6 +61,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="16sp"
+                        android:textColor="#2d2d2d"
                         android:fontFamily="sans-serif-condensed"
                         tools:text="{{title}}"/>
 
@@ -87,5 +88,10 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"/>
+
     </androidx.cardview.widget.CardView>
 </LinearLayout>

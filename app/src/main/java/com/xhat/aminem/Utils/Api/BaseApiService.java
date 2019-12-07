@@ -10,6 +10,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface BaseApiService {
     @FormUrlEncoded
@@ -23,6 +24,13 @@ public interface BaseApiService {
     @GET("lost_item?order=DESC&status=1&data_per_page=5")
     Call<ResponseLostItem> getLastItemLost(@Header("Authorization") String authToken);
 
+    @GET("lost_item/detail/{itemId}")
+    Call<ResponseBody> getLostItemDetail(@Header("Authorization") String authToken,
+                                         @Path("itemId") String itemId);
+
     @GET("change_log?order=DESC")
     Call<ResponseLogItem> getLogActivity(@Header("Authorization") String authToken);
+
+    @GET("member/detail")
+    Call<ResponseBody> getProfile(@Header("Authorization") String authToken);
 }

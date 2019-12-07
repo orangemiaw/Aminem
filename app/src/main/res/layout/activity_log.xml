@@ -73,5 +73,5 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:textAlignment="center"
-        android:text="No log activity record found."/>
+        android:text="No log activity record found in your account."/>
 </LinearLayout>

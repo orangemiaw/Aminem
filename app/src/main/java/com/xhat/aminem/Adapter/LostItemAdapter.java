@@ -58,7 +58,7 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
     public void onBindViewHolder(LostItemAdapter.LostItemHolder holder, int position) {
         final AlllostitemItem alllostitemItem = allLostItemList.get(position);
         holder.tvItemName.setText(alllostitemItem.getItemName());
-        holder.tvItemFound.setText("Ditemukan di " + alllostitemItem.getPlaceFound());
+        holder.tvItemFound.setText("Penemuan: " + alllostitemItem.getPlaceFound());
 //        holder.btnCategory.setText(alllostitemItem.getCategory());
 
         GlideApp
@@ -67,7 +67,7 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
                 .into(holder.ivItemDrawable);
 
         String itemName = alllostitemItem.getCategory();
-        String firstCharItemNama = itemName.substring(0,2).toUpperCase();
+        String firstCharItemNama = itemName.substring(0,1).toUpperCase();
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(firstCharItemNama, getColor());
         holder.ivTextDrawable.setImageDrawable(drawable);

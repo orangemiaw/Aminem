@@ -99,9 +99,9 @@ public class LogActivity extends AppCompatActivity {
                             }
                         } else {
                             loading.dismiss();
-                            Helper.clearSession(mContext);
-                            startActivity(new Intent(mContext, LoginActivity.class));
-                            Helper.showAlertDialog(mContext,"Error", "Your must login again becaouse session expired");
+                            ivError.setVisibility(View.VISIBLE);
+                            tvErrorSorry.setVisibility(View.VISIBLE);
+                            tvEmpty.setVisibility(View.VISIBLE);
                         }
                     }
 

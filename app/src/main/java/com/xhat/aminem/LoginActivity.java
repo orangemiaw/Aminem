@@ -109,15 +109,16 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             loading.dismiss();
                             try {
-                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
-                                String AuthToken = jsonRESULTS.getJSONObject("data").getString("access_token");
-                                String AuthTokenType = jsonRESULTS.getJSONObject("data").getString("token_type");
+                                JSONObject jsonResults = new JSONObject(response.body().string());
+                                JSONObject jsonData = jsonResults.getJSONObject("data");
+                                String AuthToken = jsonData.getString("access_token");
+                                String AuthTokenType = jsonData.getString("token_type");
 
                                 if (AuthToken != null){
-                                    // Toast.makeText(mContext, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                    String UserId = jsonRESULTS.getJSONObject("data").getString("access_id");
-                                    String UserNim = jsonRESULTS.getJSONObject("data").getJSONObject("profile_info").getString("nim");
-                                    String UserName = jsonRESULTS.getJSONObject("data").getJSONObject("profile_info").getString("name");
+                                    String UserId = jsonData.getString("access_id");
+                                    JSONObject jsonProfile = jsonData.getJSONObject("profile_info");
+                                    String UserNim = jsonProfile.getString("nim");
+                                    String UserName = jsonProfile.getString("name");
 
                                     Log.d("USER_NIM", UserNim);
                                     Log.d("USER_NAME", UserName);

@@ -153,19 +153,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         String id = alllostitemItemList.get(position).getId();
-                        String name = alllostitemItemList.get(position).getItemName();
-                        String image = alllostitemItemList.get(position).getImage();
-                        String found = alllostitemItemList.get(position).getPlaceFound();
-                        String save = alllostitemItemList.get(position).getPlaceSaveName();
-                        String desc = alllostitemItemList.get(position).getDescription();
 
                         Intent detailItem = new Intent(mContext, LostItemDetailActivity.class); // sementara
                         detailItem.putExtra(Constant.KEY_ID_ITEM, id);
-                        detailItem.putExtra(Constant.KEY_ITEM_NAME, name);
-                        detailItem.putExtra(Constant.KEY_ITEM_IMAGE, image);
-                        detailItem.putExtra(Constant.KEY_ITEM_FOUND, "Ditemukan di " + found);
-                        detailItem.putExtra(Constant.KEY_ITEM_SAVE, "Dapat diambil di " + save);
-                        detailItem.putExtra(Constant.KEY_ITEM_DESC, desc);
                         startActivity(detailItem);
                     }
                 }));
