@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class LostItemDetailActivity extends AppCompatActivity {
     LinearLayout viewDetail;
     TextView tvItemName, tvItemFound, tvItemSave, tvItemDesc;
     ImageView ivItemDrawable, ivTextDrawable;
+    Button btnCategory;
     String itemId, itemName, itemImage, itemCategory, itemDesc, itemFound, itemSave, itemSaveImage, itemStatus;
 
     ProgressDialog loading;
@@ -88,6 +90,7 @@ public class LostItemDetailActivity extends AppCompatActivity {
         tvItemDesc = findViewById(R.id.tv_item_desc);
         ivItemDrawable = findViewById(R.id.iv_item_drawable);
         ivTextDrawable = findViewById(R.id.iv_text_drawable);
+        btnCategory = findViewById(R.id.btn_category);
 
         lostItemDetail();
     }
@@ -120,6 +123,7 @@ public class LostItemDetailActivity extends AppCompatActivity {
                                     tvItemName.setText(itemName);
                                     tvItemFound.setText("Penemuan: " + itemFound);
                                     tvItemSave.setText("Pengambilan: " + itemSave);
+                                    btnCategory.setText(itemCategory);
 
                                     if(itemDesc.equals("null")) {
                                         tvItemDesc.setText("No description available.");

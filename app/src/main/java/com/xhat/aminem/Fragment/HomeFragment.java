@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment {
                     public void onItemClick(View view, int position) {
                         String id = alllostitemItemList.get(position).getId();
 
-                        Intent detailItem = new Intent(mContext, LostItemDetailActivity.class); // sementara
+                        Intent detailItem = new Intent(mContext, LostItemDetailActivity.class);
                         detailItem.putExtra(Constant.KEY_ID_ITEM, id);
                         startActivity(detailItem);
                     }

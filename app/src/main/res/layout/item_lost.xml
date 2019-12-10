@@ -13,8 +13,7 @@
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="20dp">
+        app:cardCornerRadius="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,6 +36,7 @@
                     android:id="@+id/iv_text_drawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:visibility="gone"
                     android:layout_gravity="center"/>
 
 <!--                <ImageView-->
@@ -75,6 +75,16 @@
                         android:fontFamily="sans-serif-light"
                         tools:text="{{found_place}}"/>
 
+                    <TextView
+                        android:id="@+id/tv_item_save"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-light"
+                        tools:text="{{save_place}}"/>
+
 <!--                    <Button-->
 <!--                        android:id="@+id/btn_category"-->
 <!--                        android:layout_width="wrap_content"-->
@@ -85,13 +95,27 @@
 <!--                        android:textColor="@color/colorAccent"-->
 <!--                        android:textSize="10sp"-->
 <!--                        app:cornerRadius="5dp" />-->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="{{category}}"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            android:theme="@style/ButtonTheme" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="8dp"/>
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>

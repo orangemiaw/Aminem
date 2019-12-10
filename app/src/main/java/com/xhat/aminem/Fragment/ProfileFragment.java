@@ -19,18 +19,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.bumptech.glide.request.RequestOptions;
+import com.xhat.aminem.ChangePasswordActivity;
 import com.xhat.aminem.LoginActivity;
+import com.xhat.aminem.LostItemDetailActivity;
 import com.xhat.aminem.Module.GlideApp;
 import com.xhat.aminem.R;
 import com.xhat.aminem.Utils.Api.BaseApiService;
 import com.xhat.aminem.Utils.Api.UtilsApi;
+import com.xhat.aminem.Utils.Constant;
 import com.xhat.aminem.Utils.Helper;
 import com.xhat.aminem.Utils.SessionManager;
+import com.xhat.aminem.VoucherActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +44,8 @@ import java.io.IOException;
 
 public class ProfileFragment extends Fragment {
     ImageView ivPhoto;
-    TextView tvPoin, tvName, tvNim, tvEmail, tvEmailPassword;
+    TextView tvPoin, tvName, tvNim, tvEmail, tvEmailPassword, tvGeneration, tvLastLogin, tvChangePassword;
+    Button btnRedem;
 
     String profileName, profileNim, profileImage, profileGeneration, profileEmail, profileEmailPassword, profilePoin, profileLogin;
 
@@ -74,7 +80,11 @@ public class ProfileFragment extends Fragment {
         tvEmail = view.findViewById(R.id.tv_profile_email);
         tvEmailPassword = view.findViewById(R.id.tv_profile_email_password);
         tvNim = view.findViewById(R.id.tv_profile_nim);
+        tvGeneration = view.findViewById(R.id.tv_profile_generation);
+        tvLastLogin = view.findViewById(R.id.tv_profile_last_login);
+        tvChangePassword = view.findViewById(R.id.tv_change_password);
         constraintLayout = view.findViewById(R.id.constraint_layout);
+        btnRedem = view.findViewById(R.id.btn_redem);
         layout2.clone(mContext, R.layout.profile_expanded);
         layout1.clone(constraintLayout);
 
@@ -92,6 +102,20 @@ public class ProfileFragment extends Fragment {
                     layout1.applyTo(constraintLayout);
                     isOpen = !isOpen ;
                 }
+            }
+        });
+
+        btnRedem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, VoucherActivity.class));
+            }
+        });
+
+        tvChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, ChangePasswordActivity.class));
             }
         });
 
@@ -123,10 +147,16 @@ public class ProfileFragment extends Fragment {
                                     profilePoin = jsonData.getString("reward_points");
                                     profileLogin = jsonData.getString("last_login");
 
+                                    if(profilePoin.equals("null")) {
+                                        profilePoin = "0";
+                                    }
+
                                     tvPoin.setText(profilePoin);
                                     tvName.setText(profileName);
                                     tvNim.setText(profileNim);
                                     tvEmail.setText(profileEmail);
+                                    tvGeneration.setText("Angkatan " + profileGeneration);
+                                    tvLastLogin.setText("Last login at " + profileLogin);
 
                                     String firstCharPassword = profileEmailPassword.substring(0,1);
                                     tvEmailPassword.setText(firstCharPassword + "*****");

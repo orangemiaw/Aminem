@@ -33,4 +33,10 @@ public interface BaseApiService {
 
     @GET("member/detail")
     Call<ResponseBody> getProfile(@Header("Authorization") String authToken);
+
+    @FormUrlEncoded
+    @POST("member/change_password")
+    Call<ResponseBody> changePassword(@Header("Authorization") String authToken,
+                                      @Field("password") String password,
+                                      @Field("password_repeat") String confirmPassword);
 }

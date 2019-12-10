@@ -15,8 +15,14 @@
         android:roundIcon="@drawable/amikom_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LostItemDetailActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".ChangePasswordActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".VoucherActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LostItemDetailActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LogActivity"
             android:parentActivityName=".MainActivity" />
@@ -28,7 +34,9 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".IntroActivity">
+        <activity
+            android:name=".IntroActivity"
+            android:theme="@style/IntroTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

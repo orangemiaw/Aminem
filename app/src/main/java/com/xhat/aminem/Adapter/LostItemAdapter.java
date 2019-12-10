@@ -59,7 +59,8 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
         final AlllostitemItem alllostitemItem = allLostItemList.get(position);
         holder.tvItemName.setText(alllostitemItem.getItemName());
         holder.tvItemFound.setText("Penemuan: " + alllostitemItem.getPlaceFound());
-//        holder.btnCategory.setText(alllostitemItem.getCategory());
+        holder.tvItemSave.setText("Pengambilan: " + alllostitemItem.getPlaceSaveName());
+        holder.btnCategory.setText(alllostitemItem.getCategory());
 
         GlideApp
                 .with(mContext)
@@ -105,18 +106,19 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
     public class LostItemHolder extends RecyclerView.ViewHolder{
         ImageView ivTextDrawable;
         ImageView ivItemDrawable;
-//        Button btnCategory;
+        Button btnCategory;
         TextView tvItemName;
-        TextView tvItemFound;
+        TextView tvItemFound, tvItemSave;
 
         public LostItemHolder(View itemView) {
             super(itemView);
 
             ivTextDrawable = itemView.findViewById(R.id.iv_text_drawable);
             ivItemDrawable = itemView.findViewById(R.id.iv_item_drawable);
-//            btnCategory = itemView.findViewById(R.id.btn_category);
+            btnCategory = itemView.findViewById(R.id.btn_category);
             tvItemName = itemView.findViewById(R.id.tv_item_name);
             tvItemFound = itemView.findViewById(R.id.tv_item_found);
+            tvItemSave = itemView.findViewById(R.id.tv_item_save);
 
             ButterKnife.bind(this, itemView);
         }

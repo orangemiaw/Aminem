@@ -178,5 +178,69 @@
                     android:layout_width="match_parent"
                     android:layout_height="8dp"/>
 
+                <androidx.cardview.widget.CardView
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/cerclebackgroundgreen"
+                                    android:src="@drawable/ic_business_white"
+                                    android:padding="10dp"/>
+
+                                <LinearLayout
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:paddingRight="8dp"
+                                    android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tv_profile_generation"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textStyle="bold"
+                                            android:textSize="16sp"
+                                            android:fontFamily="sans-serif-condensed"
+                                            tools:text="{{generation}}"/>
+
+                                        <TextView
+                                            android:id="@+id/tv_profile_last_login"
+                                            android:layout_marginTop="6dp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold"
+                                            android:fontFamily="sans-serif-light"
+                                            tools:text="{{last_login}}"
+                                            android:textColor="#2d2d2d"/>
+                                </LinearLayout>
+                        </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"/>
+
+                <TextView
+                    android:id="@+id/tv_change_password"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:padding="10dp"
+                    android:textColor="@color/pink"
+                    android:text="CHANGE PASSWORD"/>
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
