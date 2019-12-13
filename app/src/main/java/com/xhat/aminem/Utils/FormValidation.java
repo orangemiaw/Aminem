@@ -13,7 +13,12 @@ public class FormValidation {
     }
 
     public static boolean isValidPassword(String password){
-        boolean isValid = Pattern.matches(PASSWORD_PATTERN, password);
-        return isValid;
+//        boolean isValid = Pattern.matches(PASSWORD_PATTERN, password);
+//        return isValid;
+        if(password.length() < 5) {
+            return false;
+        }
+
+        return true;
     }
 }
