@@ -13,13 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="30dp"
+        android:gravity="center"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="334dp"
-            app:srcCompat="@drawable/login" />
+            android:layout_height="240dp"
+            android:layout_marginTop="80dp"
+            app:srcCompat="@drawable/authentication" />
 
         <TextView
             android:textSize="30sp"
@@ -44,29 +46,54 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <EditText
-            android:id="@+id/et_nim"
-            android:layout_marginTop="8dp"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="NIM"
-            android:textColorHint="#802d2d2d"
-            android:padding="8dp"
-            android:inputType="text"
-            android:background="@drawable/bg_rectangle_edittext"
-            android:textColor="#2d2d2d"/>
+            android:layout_marginTop="10dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="10">
 
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_marginTop="8dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_nim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:inputType="text"
+                android:hint="NIM"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            android:textColorHint="#802d2d2d"
-            android:inputType="numberPassword"
-            android:padding="8dp"
-            android:background="@drawable/bg_rectangle_edittext"
-            android:textColor="#2d2d2d"/>
+            app:counterEnabled="true"
+            app:counterMaxLength="5"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:inputType="numberPassword"
+                android:hint="Password"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <EditText-->
+<!--            android:id="@+id/et_password"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Password"-->
+<!--            android:textColorHint="#802d2d2d"-->
+<!--            android:inputType="numberPassword"-->
+<!--            android:padding="8dp"-->
+<!--            android:background="@drawable/bg_rectangle_edittext"-->
+<!--            android:textColor="#2d2d2d"/>-->
 
     </LinearLayout>
 
@@ -81,7 +108,8 @@
         android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
         android:drawableTint="@color/gradient_start_color"
         android:text="Log In"
-        android:padding="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
         android:textColor="@color/gradient_start_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -93,7 +121,7 @@
         android:id="@+id/tv_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="Help"

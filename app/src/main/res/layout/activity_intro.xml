@@ -29,7 +29,8 @@
         android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
         android:drawableTint="@color/gradient_start_color"
         android:text="Next"
-        android:padding="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
         android:textColor="@color/gradient_start_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -75,7 +76,7 @@
         android:id="@+id/tv_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="Skip"

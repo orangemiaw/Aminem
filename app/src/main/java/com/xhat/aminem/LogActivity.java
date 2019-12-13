@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xhat.aminem.Adapter.LogItemAdapter;
@@ -32,8 +33,7 @@ import java.util.List;
 
 public class LogActivity extends AppCompatActivity {
     RecyclerView rvLog;
-    TextView tvEmpty, tvErrorSorry, tvErrorHi, tvInfo;
-    ImageView ivError;
+    LinearLayout llError, llEmpty;
     ProgressDialog loading;
 
     Context mContext;
@@ -46,11 +46,6 @@ public class LogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // make the activity on full screen
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_log);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Log Activity");
@@ -60,11 +55,8 @@ public class LogActivity extends AppCompatActivity {
         sessionManager = new SessionManager(mContext);
 
         rvLog = findViewById(R.id.rv_log);
-        ivError = findViewById(R.id.iv_error);
-        tvEmpty = findViewById(R.id.tv_empty);
-        tvErrorHi = findViewById(R.id.tv_error_hi);
-        tvErrorSorry = findViewById(R.id.tv_error_sorry);
-        tvInfo = findViewById(R.id.tv_error_info);
+        llError = findViewById(R.id.ll_error);
+        llEmpty = findViewById(R.id.ll_empty);
 
         if (!sessionManager.getSPSudahLogin()){
             startActivity(new Intent(mContext, LoginActivity.class));
@@ -89,9 +81,7 @@ public class LogActivity extends AppCompatActivity {
                             loading.dismiss();
 
                             if (response.body().isError() || response.body() == null) {
-                                ivError.setVisibility(View.VISIBLE);
-                                tvErrorHi.setVisibility(View.VISIBLE);
-                                tvEmpty.setVisibility(View.VISIBLE);
+                                llError.setVisibility(View.VISIBLE);
                             } else {
                                 final List<LogItem> logItemLists = response.body().getLogitem();
                                 rvLog.setAdapter(new LogItemAdapter(mContext, logItemLists));
@@ -99,23 +89,24 @@ public class LogActivity extends AppCompatActivity {
                             }
                         } else {
                             loading.dismiss();
-                            ivError.setVisibility(View.VISIBLE);
-                            tvErrorSorry.setVisibility(View.VISIBLE);
-                            tvEmpty.setVisibility(View.VISIBLE);
+                            llEmpty.setVisibility(View.VISIBLE);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseLogItem> call, Throwable t) {
                         loading.dismiss();
-                        ivError.setVisibility(View.VISIBLE);
-                        tvErrorSorry.setVisibility(View.VISIBLE);
-                        tvInfo.setVisibility(View.VISIBLE);
-
+                        llError.setVisibility(View.VISIBLE);
                         Log.e("debug", "onFailure: ERROR > " + t.toString());
                         Helper.showTimeOut(mContext);
                     }
                 });
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

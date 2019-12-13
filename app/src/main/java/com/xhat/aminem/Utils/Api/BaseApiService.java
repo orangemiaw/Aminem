@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface BaseApiService {
     @FormUrlEncoded
@@ -24,9 +25,17 @@ public interface BaseApiService {
     @GET("lost_item?order=DESC&status=1&data_per_page=5")
     Call<ResponseLostItem> getLastItemLost(@Header("Authorization") String authToken);
 
+    @GET("lost_item")
+    Call<ResponseLostItem> getItemByCategory(@Header("Authorization") String authToken,
+                                             @Query("category") String categoryId);
+
     @GET("lost_item/detail/{itemId}")
     Call<ResponseBody> getLostItemDetail(@Header("Authorization") String authToken,
                                          @Path("itemId") String itemId);
+
+    @GET("lost_item/category_status/{categoryId}")
+    Call<ResponseBody> getCategoryStatus(@Header("Authorization") String authToken,
+                                         @Path("categoryId") String categoryId);
 
     @GET("change_log?order=DESC")
     Call<ResponseLogItem> getLogActivity(@Header("Authorization") String authToken);
@@ -39,4 +48,8 @@ public interface BaseApiService {
     Call<ResponseBody> changePassword(@Header("Authorization") String authToken,
                                       @Field("password") String password,
                                       @Field("password_repeat") String confirmPassword);
+
+    @GET("place_save/detail/{placeId}")
+    Call<ResponseBody> getPlaceDetail(@Header("Authorization") String authToken,
+                                         @Path("placeId") String placeId);
 }

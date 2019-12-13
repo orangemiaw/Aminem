@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.xhat.aminem.Adapter.LostItemAdapter;
 import com.xhat.aminem.LoginActivity;
+import com.xhat.aminem.LostItemByCategoryActivity;
 import com.xhat.aminem.LostItemDetailActivity;
 import com.xhat.aminem.Model.AlllostitemItem;
 import com.xhat.aminem.Model.ResponseLostItem;
@@ -56,6 +58,7 @@ public class HomeFragment extends Fragment {
     ViewFlipper vfBanner;
     RecyclerView rvItem;
     TextView tvProfileName, tvEmpty, tvLastFound;
+    CardView cvCategoryIdCard, cvCategoryWallet, cvCategoryDocument, cvCategoryKey, cvCategoryElectronic, cvCategoryOther;
 
     ProgressDialog loading;
     ArrayList<String> imageUrl = new ArrayList<>();
@@ -105,9 +108,79 @@ public class HomeFragment extends Fragment {
             setFlipperImage(image);
         }
 
+        // Get clicked on category
+        cvCategoryIdCard = view.findViewById(R.id.btn_category_id_card);
+        cvCategoryDocument = view.findViewById(R.id.btn_category_document);
+        cvCategoryKey = view.findViewById(R.id.btn_category_key);
+        cvCategoryElectronic = view.findViewById(R.id.btn_category_electronic);
+        cvCategoryWallet = view.findViewById(R.id.btn_category_wallet);
+        cvCategoryOther = view.findViewById(R.id.btn_category_other);
+        getCategory();
+
         return view;
     }
 
+    private void getCategory() {
+        cvCategoryIdCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailCategory = new Intent(mContext, LostItemByCategoryActivity.class);
+                detailCategory.putExtra(Constant.CATEGORY_ID, Constant.CATEGORY_ID_CARD);
+                detailCategory.putExtra(Constant.CATEGORY_NAME, "ID Card");
+                startActivity(detailCategory);
+            }
+        });
+
+        cvCategoryDocument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailCategory = new Intent(mContext, LostItemByCategoryActivity.class);
+                detailCategory.putExtra(Constant.CATEGORY_ID, Constant.CATEGORY_DOCUMENT);
+                detailCategory.putExtra(Constant.CATEGORY_NAME, "Document");
+                startActivity(detailCategory);
+            }
+        });
+
+        cvCategoryKey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailCategory = new Intent(mContext, LostItemByCategoryActivity.class);
+                detailCategory.putExtra(Constant.CATEGORY_ID, Constant.CATEGORY_KEY);
+                detailCategory.putExtra(Constant.CATEGORY_NAME, "Key");
+                startActivity(detailCategory);
+            }
+        });
+
+        cvCategoryElectronic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailCategory = new Intent(mContext, LostItemByCategoryActivity.class);
+                detailCategory.putExtra(Constant.CATEGORY_ID, Constant.CATEGORY_ELECTRONIC);
+                detailCategory.putExtra(Constant.CATEGORY_NAME, "Electronic");
+                startActivity(detailCategory);
+            }
+        });
+
+        cvCategoryWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailCategory = new Intent(mContext, LostItemByCategoryActivity.class);
+                detailCategory.putExtra(Constant.CATEGORY_ID, Constant.CATEGORY_WALLET);
+                detailCategory.putExtra(Constant.CATEGORY_NAME, "Wallet");
+                startActivity(detailCategory);
+            }
+        });
+
+        cvCategoryOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailCategory = new Intent(mContext, LostItemByCategoryActivity.class);
+                detailCategory.putExtra(Constant.CATEGORY_ID, Constant.CATEGORY_OTHER);
+                detailCategory.putExtra(Constant.CATEGORY_NAME, "Other");
+                startActivity(detailCategory);
+            }
+        });
+    }
 
     private void getDataItem(){
         loading = ProgressDialog.show(mContext, null, "Harap Tunggu...", true, false);

@@ -7,13 +7,50 @@
     android:background="#f7f7f7"
     tools:context=".Fragment.ProfileFragment">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/ll_error"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img2" />
+
+        <TextView
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#2d2d2d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textAlignment="center"
+            android:text="Sorry Guys"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#2d2d2d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textAlignment="center"
+            android:text="Failed to get data from server for some reason."/>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/sv_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.demotxt.myapp.profileui.MainActivity"
                 android:id="@+id/constraint_layout">
 
                 <ImageView
@@ -68,12 +105,13 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_redem"
+                    app:icon="@drawable/ic_poin"
+                    app:iconPadding="5dp"
+                    app:iconSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Redem Points"
+                    android:text="Redem"
                     android:textSize="8sp"
                     android:textStyle="bold"
                     android:theme="@style/ButtonTheme"

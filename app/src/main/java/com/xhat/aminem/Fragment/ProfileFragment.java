@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -45,6 +47,8 @@ import java.io.IOException;
 public class ProfileFragment extends Fragment {
     ImageView ivPhoto;
     TextView tvPoin, tvName, tvNim, tvEmail, tvEmailPassword, tvGeneration, tvLastLogin, tvChangePassword;
+    ScrollView svProfile;
+    LinearLayout llError;
     Button btnRedem;
 
     String profileName, profileNim, profileImage, profileGeneration, profileEmail, profileEmailPassword, profilePoin, profileLogin;
@@ -74,6 +78,8 @@ public class ProfileFragment extends Fragment {
         layout1 = new ConstraintSet();
         layout2 = new ConstraintSet();
 
+        svProfile = view.findViewById(R.id.sv_profile);
+        llError = view.findViewById(R.id.ll_error);
         ivPhoto = view.findViewById(R.id.iv_photo);
         tvPoin = view.findViewById(R.id.tv_poin);
         tvName = view.findViewById(R.id.tv_profile_name);
@@ -115,7 +121,9 @@ public class ProfileFragment extends Fragment {
         tvChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext, ChangePasswordActivity.class));
+                Intent changePassword = new Intent(mContext, ChangePasswordActivity.class);
+                changePassword.putExtra(Constant.PROFILE_IMAGE, profileImage);
+                startActivity(changePassword);
             }
         });
 
@@ -137,7 +145,7 @@ public class ProfileFragment extends Fragment {
                                 profileName = jsonData.getString("fullname");
 
                                 if (profileName != null){
-//                                    viewDetail.setVisibility(View.VISIBLE);
+                                    svProfile.setVisibility(View.VISIBLE);
 
                                     profileNim = jsonData.getString("nim");
                                     profileImage = jsonData.getString("profile_image");
@@ -151,7 +159,7 @@ public class ProfileFragment extends Fragment {
                                         profilePoin = "0";
                                     }
 
-                                    tvPoin.setText(profilePoin);
+                                    tvPoin.setText(profilePoin + " TKN");
                                     tvName.setText(profileName);
                                     tvNim.setText(profileNim);
                                     tvEmail.setText(profileEmail);
@@ -161,7 +169,6 @@ public class ProfileFragment extends Fragment {
                                     String firstCharPassword = profileEmailPassword.substring(0,1);
                                     tvEmailPassword.setText(firstCharPassword + "*****");
 
-
                                     GlideApp
                                             .with(mContext)
                                             .load(profileImage)
@@ -169,6 +176,7 @@ public class ProfileFragment extends Fragment {
                                             .into(ivPhoto);
 
                                 } else {
+                                    llError.setVisibility(View.VISIBLE);
                                     Helper.showAlertDialog(mContext,"Error", "Request failed, something when wrong");
                                 }
                             } catch (JSONException e) {
@@ -179,6 +187,8 @@ public class ProfileFragment extends Fragment {
                         } else {
                             loading.dismiss();
                             try {
+                                llError.setVisibility(View.VISIBLE);
+
                                 JSONObject jsonResults = new JSONObject(response.errorBody().string());
                                 String error_message = jsonResults.getString("message");
                                 Integer error_code = jsonResults.getInt("code");
@@ -200,6 +210,7 @@ public class ProfileFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        llError.setVisibility(View.VISIBLE);
                         Helper.showTimeOut(mContext);
                         Log.e("debug", "onFailure: ERROR > " + t.toString());
                         loading.dismiss();

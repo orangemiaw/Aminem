@@ -19,11 +19,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.xhat.aminem.Fragment.ProfileFragment;
+import com.xhat.aminem.Module.GlideApp;
 import com.xhat.aminem.Utils.Api.BaseApiService;
 import com.xhat.aminem.Utils.Api.UtilsApi;
+import com.xhat.aminem.Utils.Constant;
 import com.xhat.aminem.Utils.FormValidation;
 import com.xhat.aminem.Utils.Helper;
 import com.xhat.aminem.Utils.SessionManager;
@@ -36,6 +40,8 @@ import java.io.IOException;
 public class ChangePasswordActivity extends AppCompatActivity {
     Button btnChangePassword, btnCancel;
     EditText etPassword, etConfirmPassword;
+    ImageView ivPhoto;
+    String profileImage;
     Context mContext;
     BaseApiService mApiService;
     SessionManager sessionManager;
@@ -44,11 +50,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // make the activity on full screen
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_change_password);
 
@@ -59,19 +60,25 @@ public class ChangePasswordActivity extends AppCompatActivity {
         mApiService = UtilsApi.getAPIService();
         sessionManager = new SessionManager(this);
 
+        Intent intent = getIntent();
+        profileImage = intent.getStringExtra(Constant.PROFILE_IMAGE);
+
+        ivPhoto = findViewById(R.id.iv_photo);
         etPassword = findViewById(R.id.et_password);
         etConfirmPassword = findViewById(R.id.et_confirm_password);
         btnChangePassword = findViewById(R.id.btn_change_password);
         btnCancel = findViewById(R.id.btn_cancel);
 
+        GlideApp
+                .with(mContext)
+                .load(profileImage)
+                .apply(RequestOptions.circleCropTransform())
+                .into(ivPhoto);
+
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Fragment selectedFragment = new ProfileFragment();
-//                if (selectedFragment != null) {
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_profile,
-//                            selectedFragment).commit();
-//                }
+                onBackPressed();
             }
         });
 
@@ -108,7 +115,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 String userId = jsonData.getString("_id");
 
                                 if (userId != null){
-                                    Helper.showAlertDialog(mContext,"Success", "Password has been changed successfully");
+                                    Helper.showAlertDialog(mContext,"Success", "Password has been changed successfully. You must relogin to continue use this app.");
                                 } else {
                                     Helper.showAlertDialog(mContext,"Error", "Change password failed, something when wrong");
                                 }
@@ -139,5 +146,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         loading.dismiss();
                     }
                 });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

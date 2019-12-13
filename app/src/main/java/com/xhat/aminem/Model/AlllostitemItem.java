@@ -16,17 +16,14 @@ public class AlllostitemItem {
     @SerializedName("image")
     private String image;
 
-    @SerializedName("description")
-    private String description;
+    @SerializedName("date_found")
+    private String date_found;
 
     @SerializedName("place_found")
     private String place_found;
 
     @SerializedName("place_save_name")
     private String place_save_name;
-
-    @SerializedName("place_save_image")
-    private String place_save_image;
 
     @SerializedName("status")
     private String status;
@@ -63,12 +60,12 @@ public class AlllostitemItem {
         return image;
     }
 
-    public void setDescription(String description){
-        this.description = description;
+    public void setDateFound(String date_found){
+        this.date_found = date_found;
     }
 
-    public String getDescription(){
-        return description;
+    public String getDateFound(){
+        return date_found;
     }
 
     public void setPlaceFound(String place_found){
@@ -87,14 +84,6 @@ public class AlllostitemItem {
         return place_save_name;
     }
 
-    public void setPlaceSaveImage(String place_save_image){
-        this.place_found = place_save_image;
-    }
-
-    public String getPlaceSaveImage(){
-        return place_save_image;
-    }
-
     public void setStatus(String status){
         this.status = status;
     }
@@ -111,10 +100,9 @@ public class AlllostitemItem {
                         ",name = '" + name + '\'' +
                         ",category = '" + category + '\'' +
                         ",image = '" + image + '\'' +
-                        ",description = '" + description + '\'' +
+                        ",date_found = '" + date_found + '\'' +
                         ",place_found = '" + place_found + '\'' +
                         ",place_save_name = '" + place_save_name + '\'' +
-                        ",place_save_image = '" + place_save_image + '\'' +
                         ",status = '" + status + '\'' +
                         "}";
     }

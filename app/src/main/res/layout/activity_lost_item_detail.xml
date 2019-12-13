@@ -7,16 +7,52 @@
     tools:context=".LostItemDetailActivity">
 
     <LinearLayout
+        android:id="@+id/ll_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img2" />
+
+        <TextView
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#2d2d2d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textAlignment="center"
+            android:text="Sorry Guys"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#2d2d2d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textAlignment="center"
+            android:text="Failed to get data from server for some reason."/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/view_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
         android:layout_marginBottom="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
@@ -41,9 +77,10 @@
 
                     <ImageView
                         android:id="@+id/iv_text_drawable"
+                        android:alpha="0.9"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_gravity="center"/>
+                        android:padding="10dp"/>
 
     <!--                <ImageView-->
     <!--                    android:id="@+id/iv_text_drawable"-->
@@ -97,13 +134,19 @@
                             android:gravity="right">
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btn_category"
+                                app:icon="@drawable/ic_time"
+                                app:iconPadding="5dp"
+                                app:iconSize="15sp"
+                                android:clickable="false"
+                                android:padding="8dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:text="{{category}}"
                                 android:textSize="8sp"
                                 android:textStyle="bold"
+                                android:alpha="0.9"
+                                android:text="{{category}}"
                                 android:theme="@style/ButtonTheme" />
                         </LinearLayout>
                     </LinearLayout>
@@ -147,11 +190,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/view_pickup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_navigation"
             android:foreground="?android:attr/selectableItemBackground"

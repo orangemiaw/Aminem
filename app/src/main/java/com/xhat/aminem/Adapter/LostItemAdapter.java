@@ -60,42 +60,49 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.LostIt
         holder.tvItemName.setText(alllostitemItem.getItemName());
         holder.tvItemFound.setText("Penemuan: " + alllostitemItem.getPlaceFound());
         holder.tvItemSave.setText("Pengambilan: " + alllostitemItem.getPlaceSaveName());
-        holder.btnCategory.setText(alllostitemItem.getCategory());
+        //holder.btnCategory.setText(alllostitemItem.getCategory());
+        holder.btnCategory.setText(alllostitemItem.getDateFound());
 
         GlideApp
                 .with(mContext)
                 .load(alllostitemItem.getImage())
                 .into(holder.ivItemDrawable);
 
-        String itemName = alllostitemItem.getCategory();
-        String firstCharItemNama = itemName.substring(0,1).toUpperCase();
-        TextDrawable drawable = TextDrawable.builder()
-                .buildRound(firstCharItemNama, getColor());
-        holder.ivTextDrawable.setImageDrawable(drawable);
+//        String itemName = alllostitemItem.getCategory();
+//        String firstCharItemNama = itemName.substring(0,1).toUpperCase();
+//        TextDrawable drawable = TextDrawable.builder()
+//                .buildRound(firstCharItemNama, getColor());
+//        holder.ivTextDrawable.setImageDrawable(drawable);
 
-//        String category = alllostitemItem.getCategory();
-//        Log.d("CATEGORY", category);
-//
-//        switch (category) {
-//            case "Kartu Identitas":
-//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_lightbulb_outline_black_24dp));
-//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundyello));
-//            case "Dokumen":
-//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_attach_file_black_24dp));
-//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundpink));
-//            case "Kunci":
-//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_key_white));
-//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundgreen));
-//            case "Elektronik":
-//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_electronic_white));
-//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundgreen));
-//            case "Dompet":
-//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_attach_money_black_24dp));
-//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundyello));
-//            case "Lainnya":
-//                holder.ivTextDrawable.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_other_white));
-//                holder.ivTextDrawable.setBackground(mContext.getResources().getDrawable(R.drawable.cerclebackgroundpink));
-//        }
+        String category = alllostitemItem.getCategory();
+        Log.d("CATEGORY", category);
+
+        switch (category) {
+            case "Kartu Identitas":
+                holder.ivTextDrawable.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
+                holder.ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundyello);
+                break;
+            case "Dokumen":
+                holder.ivTextDrawable.setImageResource(R.drawable.ic_attach_file_black_24dp);
+                holder.ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundpink);
+                break;
+            case "Kunci":
+                holder.ivTextDrawable.setImageResource(R.drawable.ic_key_white);
+                holder.ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundgreen);
+                break;
+            case "Elektronik":
+                holder.ivTextDrawable.setImageResource(R.drawable.ic_electronic_white);
+                holder.ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundgreen);
+                break;
+            case "Dompet":
+                holder.ivTextDrawable.setImageResource(R.drawable.ic_attach_money_black_24dp);
+                holder.ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundyello);
+                break;
+            case "Lainnya":
+                holder.ivTextDrawable.setImageResource(R.drawable.ic_other_white);
+                holder.ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundpink);
+                break;
+        }
     }
 
     @Override

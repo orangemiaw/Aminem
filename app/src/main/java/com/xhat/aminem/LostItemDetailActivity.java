@@ -1,6 +1,7 @@
 package com.xhat.aminem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,41 +37,22 @@ import java.util.Random;
 
 public class LostItemDetailActivity extends AppCompatActivity {
 
-    LinearLayout viewDetail;
+    LinearLayout viewDetail, viewPickup, viewError;
     TextView tvItemName, tvItemFound, tvItemSave, tvItemDesc;
     ImageView ivItemDrawable, ivTextDrawable;
-    Button btnCategory;
-    String itemId, itemName, itemImage, itemCategory, itemDesc, itemFound, itemSave, itemSaveImage, itemStatus;
+    CardView cvCardView;
+    Button btnCategory, btnLocation;
+    String itemId, itemName, itemImage, itemCategory, itemCategoryId, itemDateFound, itemDesc, itemFound, itemSave, itemSaveId, itemSaveImage, itemStatus;
+    boolean isImageFitToScreen;
 
     ProgressDialog loading;
     Context mContext;
     BaseApiService mApiService;
     SessionManager sessionManager;
 
-    public String[] mColors = {
-            "#39add1", // light blue
-            "#3079ab", // dark blue
-            "#c25975", // mauve
-            "#e15258", // red
-            "#f9845b", // orange
-            "#838cc7", // lavender
-            "#7d669e", // purple
-            "#53bbb4", // aqua
-            "#51b46d", // green
-            "#e0ab18", // mustard
-            "#637a91", // dark gray
-            "#f092b0", // pink
-            "#b7c0c7"  // light gray
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // make the activity on full screen
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_lost_item_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,13 +66,43 @@ public class LostItemDetailActivity extends AppCompatActivity {
         itemId = intent.getStringExtra(Constant.KEY_ID_ITEM);
 
         viewDetail = findViewById(R.id.view_detail);
+        viewPickup = findViewById(R.id.view_pickup);
+        viewError = findViewById(R.id.ll_error);
         tvItemName = findViewById(R.id.tv_item_name);
         tvItemFound = findViewById(R.id.tv_item_found);
         tvItemSave = findViewById(R.id.tv_item_save);
         tvItemDesc = findViewById(R.id.tv_item_desc);
         ivItemDrawable = findViewById(R.id.iv_item_drawable);
         ivTextDrawable = findViewById(R.id.iv_text_drawable);
+        cvCardView = findViewById(R.id.card_view);
         btnCategory = findViewById(R.id.btn_category);
+        btnLocation = findViewById(R.id.btn_navigation);
+
+        // belum bekerja (no error and not work)
+        ivItemDrawable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isImageFitToScreen) {
+                    isImageFitToScreen = false;
+                    ivItemDrawable.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    ivItemDrawable.setAdjustViewBounds(true);
+                } else {
+                    isImageFitToScreen = true;
+                    ivItemDrawable.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                    ivItemDrawable.setScaleType(ImageView.ScaleType.FIT_XY);
+                }
+            }
+        });
+
+        // redirection to google maps
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailPlace = new Intent(mContext, PickupLocationActivity.class);
+                detailPlace.putExtra(Constant.KEY_ID_PLACE, itemSaveId);
+                startActivity(detailPlace);
+            }
+        });
 
         lostItemDetail();
     }
@@ -111,19 +123,23 @@ public class LostItemDetailActivity extends AppCompatActivity {
 
                                 if (itemName != null){
                                     viewDetail.setVisibility(View.VISIBLE);
+                                    viewPickup.setVisibility(View.VISIBLE);
 
                                     itemImage = jsonData.getString("image");
                                     itemCategory = jsonData.getString("category");
+                                    itemCategoryId = jsonData.getString("_category_id");
                                     itemDesc = jsonData.getString("description");
+                                    itemDateFound = jsonData.getString("date_found");
                                     itemFound = jsonData.getString("place_found");
                                     itemSave = jsonData.getString("place_save_name");
+                                    itemSaveId = jsonData.getString("_place_save_id");
                                     itemSaveImage = jsonData.getString("place_save_image");
                                     itemStatus = jsonData.getString("status");
 
                                     tvItemName.setText(itemName);
                                     tvItemFound.setText("Penemuan: " + itemFound);
                                     tvItemSave.setText("Pengambilan: " + itemSave);
-                                    btnCategory.setText(itemCategory);
+                                    btnCategory.setText(itemDateFound);
 
                                     if(itemDesc.equals("null")) {
                                         tvItemDesc.setText("No description available.");
@@ -136,12 +152,10 @@ public class LostItemDetailActivity extends AppCompatActivity {
                                             .load(itemImage)
                                             .into(ivItemDrawable);
 
-                                    String firstCharNamaMatkul = itemName.substring(0,1);
-                                    TextDrawable drawable = TextDrawable.builder()
-                                            .buildRound(firstCharNamaMatkul, getColor());
-                                    ivTextDrawable.setImageDrawable(drawable);
+                                    setIcon(itemCategoryId);
 
                                 } else {
+                                    viewError.setVisibility(View.VISIBLE);
                                     Helper.showAlertDialog(mContext,"Error", "Request failed, something when wrong");
                                 }
                             } catch (JSONException e) {
@@ -156,6 +170,7 @@ public class LostItemDetailActivity extends AppCompatActivity {
                                 String error_message = jsonResults.getString("message");
                                 Integer error_code = jsonResults.getInt("code");
 
+                                viewError.setVisibility(View.VISIBLE);
                                 Helper.showAlertDialog(mContext,"Error", error_message);
 
                                 if(error_code == 401) {
@@ -174,6 +189,7 @@ public class LostItemDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        viewError.setVisibility(View.VISIBLE);
                         Helper.showTimeOut(mContext);
                         Log.e("debug", "onFailure: ERROR > " + t.toString());
                         loading.dismiss();
@@ -181,16 +197,38 @@ public class LostItemDetailActivity extends AppCompatActivity {
                 });
     }
 
-    public int getColor() {
-        String color;
+    private void setIcon(String itemCategoryId) {
+        switch (itemCategoryId) {
+            case Constant.CATEGORY_ID_CARD:
+                ivTextDrawable.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
+                ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundyello);
+                break;
+            case Constant.CATEGORY_DOCUMENT:
+                ivTextDrawable.setImageResource(R.drawable.ic_attach_file_black_24dp);
+                ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundpink);
+                break;
+            case Constant.CATEGORY_KEY:
+                ivTextDrawable.setImageResource(R.drawable.ic_key_white);
+                ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundgreen);
+                break;
+            case Constant.CATEGORY_ELECTRONIC:
+                ivTextDrawable.setImageResource(R.drawable.ic_electronic_white);
+                ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundgreen);
+                break;
+            case Constant.CATEGORY_WALLET:
+                ivTextDrawable.setImageResource(R.drawable.ic_attach_money_black_24dp);
+                ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundyello);
+                break;
+            case Constant.CATEGORY_OTHER:
+                ivTextDrawable.setImageResource(R.drawable.ic_other_white);
+                ivTextDrawable.setBackgroundResource(R.drawable.cerclebackgroundpink);
+                break;
+        }
+    }
 
-        // Randomly select a fact
-        Random randomGenerator = new Random(); // Construct a new Random number generator
-        int randomNumber = randomGenerator.nextInt(mColors.length);
-
-        color = mColors[randomNumber];
-        int colorAsInt = Color.parseColor(color);
-
-        return colorAsInt;
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
