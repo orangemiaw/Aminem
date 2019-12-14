@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -113,12 +115,39 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.logout:
-                Helper.clearSession(mContext);
-                startActivity(new Intent(mContext, LoginActivity.class));
-                finish();
+                logOutConfirmation();
                 break;
         }
 
         return true;
+    }
+
+    private void logOutConfirmation(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle("Confirmation");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage("Are you sure you want to log out?")
+                .setIcon(R.drawable.ic_help)
+                .setCancelable(false)
+                .setNeutralButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Helper.clearSession(mContext);
+                        startActivity(new Intent(mContext, LoginActivity.class));
+                        finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog logOutDialog = alertDialogBuilder.create();
+        logOutDialog.show();
     }
 }
