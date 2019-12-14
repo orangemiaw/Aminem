@@ -127,21 +127,21 @@ public class MainActivity extends AppCompatActivity {
                 this);
 
         // set title dialog
-        alertDialogBuilder.setTitle("Confirmation");
+        alertDialogBuilder.setTitle("Hmm, sure?");
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setMessage("Are you sure you want to log out?")
+                .setMessage("Are you sure you want to log out? It will make this app fell heartbroken. Please, don't go :(")
                 .setIcon(R.drawable.ic_help)
                 .setCancelable(false)
-                .setNeutralButton("Yes",new DialogInterface.OnClickListener() {
+                .setNeutralButton("Yes, of course",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Helper.clearSession(mContext);
                         startActivity(new Intent(mContext, LoginActivity.class));
                         finish();
                     }
                 })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                .setNegativeButton("No, I changed my mind",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
