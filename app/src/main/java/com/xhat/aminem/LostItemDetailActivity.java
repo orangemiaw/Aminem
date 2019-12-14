@@ -40,10 +40,9 @@ public class LostItemDetailActivity extends AppCompatActivity {
     LinearLayout viewDetail, viewPickup, viewError;
     TextView tvItemName, tvItemFound, tvItemSave, tvItemDesc;
     ImageView ivItemDrawable, ivTextDrawable;
-    CardView cvCardView;
+    CardView cvDetail;
     Button btnCategory, btnLocation;
     String itemId, itemName, itemImage, itemCategory, itemCategoryId, itemDateFound, itemDesc, itemFound, itemSave, itemSaveId, itemSaveImage, itemStatus;
-    boolean isImageFitToScreen;
 
     ProgressDialog loading;
     Context mContext;
@@ -74,23 +73,20 @@ public class LostItemDetailActivity extends AppCompatActivity {
         tvItemDesc = findViewById(R.id.tv_item_desc);
         ivItemDrawable = findViewById(R.id.iv_item_drawable);
         ivTextDrawable = findViewById(R.id.iv_text_drawable);
-        cvCardView = findViewById(R.id.card_view);
+        cvDetail = findViewById(R.id.cv_detail);
         btnCategory = findViewById(R.id.btn_category);
         btnLocation = findViewById(R.id.btn_navigation);
 
+        lostItemDetail();
+
         // belum bekerja (no error and not work)
-        ivItemDrawable.setOnClickListener(new View.OnClickListener() {
+        cvDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isImageFitToScreen) {
-                    isImageFitToScreen = false;
-                    ivItemDrawable.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    ivItemDrawable.setAdjustViewBounds(true);
-                } else {
-                    isImageFitToScreen = true;
-                    ivItemDrawable.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-                    ivItemDrawable.setScaleType(ImageView.ScaleType.FIT_XY);
-                }
+                Intent imageDetail = new Intent(mContext, ImageViewActivity.class);
+                imageDetail.putExtra(Constant.TEMP_IMAGE_URL, itemImage);
+                imageDetail.putExtra(Constant.TEMP_IMAGE_TITLE, itemName);
+                startActivity(imageDetail);
             }
         });
 
@@ -103,8 +99,6 @@ public class LostItemDetailActivity extends AppCompatActivity {
                 startActivity(detailPlace);
             }
         });
-
-        lostItemDetail();
     }
 
     private void lostItemDetail() {

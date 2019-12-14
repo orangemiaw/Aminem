@@ -53,9 +53,6 @@ import java.util.List;
 
 public class PickupLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
-    private boolean isOpen = false;
-    private ConstraintSet layout1, layout2;
-    private ConstraintLayout constraintLayout;
 
     ProgressDialog loading;
     Context mContext;
@@ -86,30 +83,18 @@ public class PickupLocationActivity extends AppCompatActivity implements OnMapRe
         // Get data froms erver
         placeSaveDetail();
 
-        layout1 = new ConstraintSet();
-        layout2 = new ConstraintSet();
-
         tvPlaceName = findViewById(R.id.tv_place_name);
         tvPlaceDesc = findViewById(R.id.tv_place_desc);
         ivPlace = findViewById(R.id.iv_place);
         cvPlace = findViewById(R.id.cv_place);
-        constraintLayout = findViewById(R.id.constrain_place);
-        layout2.clone(mContext, R.layout.pickup_location_expanded);
-        layout1.clone(constraintLayout);
 
-        ivPlace.setOnClickListener(new View.OnClickListener() {
+        cvPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("ACTION INFO", "Image clicked");
-                if (!isOpen) {
-                    TransitionManager.beginDelayedTransition(constraintLayout);
-                    layout2.applyTo(constraintLayout);
-                    isOpen = !isOpen;
-                } else {
-                    TransitionManager.beginDelayedTransition(constraintLayout);
-                    layout1.applyTo(constraintLayout);
-                    isOpen = !isOpen;
-                }
+                Intent imageDetail = new Intent(mContext, ImageViewActivity.class);
+                imageDetail.putExtra(Constant.TEMP_IMAGE_URL, placeImage);
+                imageDetail.putExtra(Constant.TEMP_IMAGE_TITLE, placeName);
+                startActivity(imageDetail);
             }
         });
     }

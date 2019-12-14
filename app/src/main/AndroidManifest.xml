@@ -23,6 +23,7 @@
         android:roundIcon="@drawable/amikom_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ImageViewActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -30,9 +31,9 @@
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false"/>
+            android:required="false" />
 
-        <activity android:name=".PickupLocationActivity"></activity>
+        <activity android:name=".PickupLocationActivity" />
         <activity android:name=".LostItemByCategoryActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".VoucherActivity" />

@@ -53,27 +53,28 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
-    ViewFlipper vfBanner;
-    RecyclerView rvItem;
-    TextView tvProfileName, tvEmpty, tvLastFound;
-    CardView cvCategoryIdCard, cvCategoryWallet, cvCategoryDocument, cvCategoryKey, cvCategoryElectronic, cvCategoryOther;
+    private ViewFlipper vfBanner;
+    private RecyclerView rvItem;
+    private TextView tvProfileName, tvEmpty, tvLastFound;
+    private CardView cvCategoryIdCard, cvCategoryWallet, cvCategoryDocument, cvCategoryKey, cvCategoryElectronic, cvCategoryOther;
 
-    ProgressDialog loading;
-    ArrayList<String> imageUrl = new ArrayList<>();
+    private ProgressDialog loading;
+    private ArrayList<String> imageUrl = new ArrayList<>();
 
-    List<AlllostitemItem> alllostitemItemList = new ArrayList<>();
-    LostItemAdapter lostItemAdapter;
-    Context mContext;
-    BaseApiService mApiService;
-    SessionManager sessionManager;
+    private List<AlllostitemItem> alllostitemItemList = new ArrayList<>();
+    private LostItemAdapter lostItemAdapter;
+    private Context mContext;
+    private BaseApiService mApiService;
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().setTitle("Dashboard");
+        Objects.requireNonNull(getActivity()).setTitle("Dashboard");
         setHasOptionsMenu(true);
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -241,7 +242,6 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
-                            loading.dismiss();
                             try {
                                 JSONObject jsonResults = new JSONObject(response.body().string());
                                 JSONArray arraySlider = jsonResults.getJSONArray("data");
@@ -265,8 +265,6 @@ public class HomeFragment extends Fragment {
                                 Helper.showTimeOut(mContext);
                                 e.printStackTrace();
                             }
-
-                            loading.dismiss();
                         } else {
                             try {
                                 JSONObject jsonResults = new JSONObject(response.errorBody().string());
@@ -284,8 +282,6 @@ public class HomeFragment extends Fragment {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
-                            loading.dismiss();
                         }
                     }
 
@@ -293,7 +289,6 @@ public class HomeFragment extends Fragment {
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Helper.showTimeOut(mContext);
                         Log.e("debug", "onFailure: ERROR > " + t.toString());
-                        loading.dismiss();
                     }
                 });
     }

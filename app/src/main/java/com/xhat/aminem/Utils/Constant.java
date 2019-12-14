@@ -4,6 +4,8 @@ public class Constant {
     public static final String KEY_ID_ITEM = "keyIdItem";
     public static final String KEY_ID_PLACE = "keyIdPlace";
     public static final String PROFILE_IMAGE = "keyIdItem";
+    public static final String TEMP_IMAGE_URL = "tmpImageUrl";
+    public static final String TEMP_IMAGE_TITLE = "tmpImageTitle";
     public static final String TELEGRAM_URL_GROUP = "http://t.me/aminemgroup";
 
     public static final String CATEGORY_ID = "categoryId";
