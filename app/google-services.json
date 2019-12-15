@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "633838737754",
+    "firebase_url": "https://animem-a849a.firebaseio.com",
+    "project_id": "animem-a849a",
+    "storage_bucket": "animem-a849a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633838737754:android:4d6e3ac28e2f525d4e3b63",
+        "android_client_info": {
+          "package_name": "com.xhat.aminem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633838737754-4lf47iv3eq8k6mt357amcnt7ojn2pr3o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xhat.aminem",
+            "certificate_hash": "e8d2046bb25f4ef42d8bef9e7fda872d6a1099ab"
+          }
+        },
+        {
+          "client_id": "633838737754-it10t3p326605stcrrmh718uliku9bis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVbDOjUlF4Hjuth24iWl6ePd-b1jWRecM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633838737754-it10t3p326605stcrrmh718uliku9bis.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
