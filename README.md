@@ -3,14 +3,16 @@ Aminem (Amikom Nemu), yaitu sebuah platform pelaporan barang hilang kusus anak A
 
 ## Arsitektur & Plugins
 - REST API (http://indiarkmedia.com/api/v1)
+- Google Maps Service
+- Glide for Load Image from Internet
+- Firebase Cloud Messanging for Notification
+- PhotoView for Zoom In and Zoom Out Image
 - Retrofit 2.0
 - OkHttp
 
 ## Active Bugs
 ### Imam Kusniadi
-- Top navigation back button, can't back to last fragment or activity (always back to MainActivity)
-- UI/UX on change password is so akwkwkward
-- Cancel button on change password still not working
-- Can't redirect to fragment profile after change password successfully
+- Infinite RecyleView still not work
+- Need to change UI/UX in change password
 
 **Masih banyak bug, ya maap - maap saja ya hehe :)**
