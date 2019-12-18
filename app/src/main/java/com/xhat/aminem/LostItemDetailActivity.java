@@ -55,7 +55,7 @@ public class LostItemDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_lost_item_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Detail");
+        getSupportActionBar().setTitle("Lost Item Detail");
 
         mContext = this;
         mApiService = UtilsApi.getAPIService();
