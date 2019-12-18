@@ -75,12 +75,12 @@ public class LostItemByCategoryActivity extends AppCompatActivity {
         sessionManager = new SessionManager(mContext);
 
         rvItem = findViewById(R.id.rv_item);
-        cvStatus = findViewById(R.id.cv_status);
-        ivStatusIcon = findViewById(R.id.iv_status_icon);
         llError = findViewById(R.id.ll_error);
         llEmpty = findViewById(R.id.ll_empty);
-        tvStatusLost = findViewById(R.id.tv_status_lost);
-        tvStatusReturned = findViewById(R.id.tv_status_returned);
+        // cvStatus = findViewById(R.id.cv_status);
+        // ivStatusIcon = findViewById(R.id.iv_status_icon);
+        // tvStatusLost = findViewById(R.id.tv_status_lost);
+        // tvStatusReturned = findViewById(R.id.tv_status_returned);
 
         if (!sessionManager.getSPSudahLogin()){
             startActivity(new Intent(mContext, LoginActivity.class));
@@ -91,92 +91,90 @@ public class LostItemByCategoryActivity extends AppCompatActivity {
         rvItem.setLayoutManager(mLayoutManager);
         rvItem.setItemAnimator(new DefaultItemAnimator());
 
-        // Change status icon
-        createStatusCard(categoryId);
-
-        // Load lost item summary in category
-        lostItemSummary();
+        // Change status icon & load lost item summary in category
+        // createStatusCard(categoryId);
+        // lostItemSummary();
 
         // Load data lost item
         getDataItem();
     }
 
-    private void createStatusCard(String categoryId) {
-        switch (categoryId) {
-            case Constant.CATEGORY_ID_CARD:
-                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.yello));
-                ivStatusIcon.setImageResource(R.drawable.category_card_id);
-                break;
-            case Constant.CATEGORY_DOCUMENT:
-                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.pink));
-                ivStatusIcon.setImageResource(R.drawable.ic_attach_file_black_24dp);
-                break;
-            case Constant.CATEGORY_KEY:
-                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.green));
-                ivStatusIcon.setImageResource(R.drawable.ic_key_white);
-                break;
-            case Constant.CATEGORY_ELECTRONIC:
-                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.green));
-                ivStatusIcon.setImageResource(R.drawable.ic_electronic_white);
-                break;
-            case Constant.CATEGORY_WALLET:
-                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.yello));
-                ivStatusIcon.setImageResource(R.drawable.ic_attach_money_black_24dp);
-                break;
-            case Constant.CATEGORY_OTHER:
-                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.pink));
-                ivStatusIcon.setImageResource(R.drawable.ic_other_white);
-                break;
-        }
-    }
+//    private void createStatusCard(String categoryId) {
+//        switch (categoryId) {
+//            case Constant.CATEGORY_ID_CARD:
+//                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.yello));
+//                ivStatusIcon.setImageResource(R.drawable.category_card_id);
+//                break;
+//            case Constant.CATEGORY_DOCUMENT:
+//                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.pink));
+//                ivStatusIcon.setImageResource(R.drawable.ic_attach_file_black_24dp);
+//                break;
+//            case Constant.CATEGORY_KEY:
+//                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.green));
+//                ivStatusIcon.setImageResource(R.drawable.ic_key_white);
+//                break;
+//            case Constant.CATEGORY_ELECTRONIC:
+//                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.green));
+//                ivStatusIcon.setImageResource(R.drawable.ic_electronic_white);
+//                break;
+//            case Constant.CATEGORY_WALLET:
+//                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.yello));
+//                ivStatusIcon.setImageResource(R.drawable.ic_attach_money_black_24dp);
+//                break;
+//            case Constant.CATEGORY_OTHER:
+//                cvStatus.setCardBackgroundColor(getResources().getColor(R.color.pink));
+//                ivStatusIcon.setImageResource(R.drawable.ic_other_white);
+//                break;
+//        }
+//    }
 
-    private void lostItemSummary() {
-        mApiService.getCategoryStatus(sessionManager.getSPToken(), categoryId)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
-                            try {
-                                JSONObject jsonResults = new JSONObject(response.body().string());
-                                JSONObject jsonData = jsonResults.getJSONObject("data");
-                                categoryItemName = jsonData.getString("category");
-
-                                if (!categoryItemName.equals("null")){
-                                    totalLost = jsonData.getString("total_lost");
-                                    totalReturned = jsonData.getString("total_returned");
-
-                                    tvStatusLost.setText(totalLost + " items lost in this category");
-                                    tvStatusReturned.setText("And " + totalReturned + " items returned to the owner");
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            try {
-                                JSONObject jsonResults = new JSONObject(response.errorBody().string());
-                                Integer error_code = jsonResults.getInt("code");
-
-                                if(error_code == 401) {
-                                    Helper.clearSession(mContext);
-                                    startActivity(new Intent(mContext, LoginActivity.class));
-                                    finish();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e("debug", "onFailure: ERROR > " + t.toString());
-                    }
-                });
-    }
+//    private void lostItemSummary() {
+//        mApiService.getCategoryStatus(sessionManager.getSPToken(), categoryId)
+//                .enqueue(new Callback<ResponseBody>() {
+//                    @Override
+//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                        if (response.isSuccessful()){
+//                            try {
+//                                JSONObject jsonResults = new JSONObject(response.body().string());
+//                                JSONObject jsonData = jsonResults.getJSONObject("data");
+//                                categoryItemName = jsonData.getString("category");
+//
+//                                if (!categoryItemName.equals("null")){
+//                                    totalLost = jsonData.getString("total_lost");
+//                                    totalReturned = jsonData.getString("total_returned");
+//
+//                                    tvStatusLost.setText(totalLost + " items lost in this category");
+//                                    tvStatusReturned.setText("And " + totalReturned + " items returned to the owner");
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else {
+//                            try {
+//                                JSONObject jsonResults = new JSONObject(response.errorBody().string());
+//                                Integer error_code = jsonResults.getInt("code");
+//
+//                                if(error_code == 401) {
+//                                    Helper.clearSession(mContext);
+//                                    startActivity(new Intent(mContext, LoginActivity.class));
+//                                    finish();
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                        Log.e("debug", "onFailure: ERROR > " + t.toString());
+//                    }
+//                });
+//    }
 
     private void getDataItem(){
         loading = ProgressDialog.show(mContext, null, "Harap Tunggu...", true, false);
@@ -192,7 +190,7 @@ public class LostItemByCategoryActivity extends AppCompatActivity {
                                 llError.setVisibility(View.VISIBLE);
                             } else {
                                 // CardView Status
-                                //cvStatus.setVisibility(View.VISIBLE);
+                                // cvStatus.setVisibility(View.VISIBLE);
 
                                 final List<AlllostitemItem> alllostitemItems = response.body().getAlllostitem();
                                 rvItem.setAdapter(new LostItemAdapter(mContext, alllostitemItems));
