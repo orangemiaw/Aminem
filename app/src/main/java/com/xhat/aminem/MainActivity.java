@@ -134,13 +134,13 @@ public class MainActivity extends AppCompatActivity {
                 this);
 
         // set title dialog
-        alertDialogBuilder.setTitle("Hmm, sure?");
+        alertDialogBuilder.setTitle("Log Out!");
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setMessage("Are you sure you want to log out? It will make this app fell heartbroken. Please, don't go :(")
+                .setMessage("Are you sure you want to log out?")
                 .setIcon(R.drawable.ic_help)
-                .setCancelable(false)
+                .setCancelable(true)
                 .setNeutralButton("Yes, of course",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Helper.clearSession(mContext);
