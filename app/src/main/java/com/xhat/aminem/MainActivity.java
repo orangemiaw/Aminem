@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 this);
 
         // set title dialog
-        alertDialogBuilder.setTitle("Log Out!");
+        alertDialogBuilder.setTitle("Log Out");
 
         // set pesan dari dialog
         alertDialogBuilder
