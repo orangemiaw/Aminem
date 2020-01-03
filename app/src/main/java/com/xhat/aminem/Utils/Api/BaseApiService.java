@@ -86,11 +86,11 @@ public interface BaseApiService {
     @Multipart
     @POST("lost_item/add")
     Call<ResponseBody> addItem(@Header("Authorization") String authToken,
-                               @Part("image\"; filename=\"lostItem.jpg\" ") RequestBody file,
+                               @Part MultipartBody.Part image,
                                @Part("name") RequestBody name,
-                               @Part("category") RequestBody categoryId,
+                               @Part("category") RequestBody category,
                                @Part("place_found") RequestBody placeFound,
-                               @Part("place_save") RequestBody placeSaveId,
+                               @Part("place_save") RequestBody placeSave,
                                @Part("description") RequestBody description);
 
     @GET("item_type")
