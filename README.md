@@ -36,15 +36,6 @@ Aminem atau Amikom Nemu adalah sebuah aplikasi android yang berfungsi untuk memb
 - Realtime Notification
 - About 
 
-## Screenshot
-![Detail](screenshot/detail.jpg)
-![Image Zooming](screenshot/image_zooming.jpg)
-![Pickup Location](screenshot/pickup_location.jpg)
-![Change Password](screenshot/change_password.jpg)
-![Log Activity](screenshot/log_activity.jpg)
-![Realtime Notification](screenshot/notification.jpg)
-
-
 ## Active Bugs
 - Infinite RecyleView still not work (fix soon)
 - Need to change UI/UX in change password (need some improvement)
