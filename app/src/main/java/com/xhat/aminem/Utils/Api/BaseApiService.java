@@ -93,6 +93,15 @@ public interface BaseApiService {
                                @Part("place_save") RequestBody placeSave,
                                @Part("description") RequestBody description);
 
+    @FormUrlEncoded
+    @POST("lost_item/update/{itemId}")
+    Call<ResponseBody> updateItem(@Header("Authorization") String authToken,
+                               @Field("name") String name,
+                               @Field("category") String category,
+                               @Field("place_found") String placeFound,
+                               @Field("place_save") String placeSave,
+                               @Field("description") String description);
+
     @GET("item_type")
     Call<ResponseCategoryItem> getAllItemCategory(@Header("Authorization") String authToken);
 

@@ -101,7 +101,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "You selected category " + selectedName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "You selected category is " + selectedName, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -116,7 +116,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "You selected place save " + selectedName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "You selected place save in " + selectedName, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -164,10 +164,10 @@ public class PostActivity extends AppCompatActivity {
                 ivItem.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
                 cursor.close();
             } else {
-                Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();
+                Helper.showAlertDialog(mContext,"Error", "You haven't picked Image.");
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            Helper.showAlertDialog(mContext,"Error", "Something went wrong.");
         }
 
     }
@@ -182,7 +182,6 @@ public class PostActivity extends AppCompatActivity {
         // Parsing any Media type file
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
-        // RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
         RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), etNama.getText().toString());
         RequestBody category = RequestBody.create(MediaType.parse("text/plain"), spinnerCategory.getSelectedItem().toString());
         RequestBody place_found = RequestBody.create(MediaType.parse("text/plain"), etPlaceFound.getText().toString());
@@ -256,14 +255,15 @@ public class PostActivity extends AppCompatActivity {
                     spinnerCategory.setAdapter(adapter);
                 } else {
                     loading.dismiss();
-                    Toast.makeText(mContext, "Gagal mengambil data kategori", Toast.LENGTH_SHORT).show();
+                    Helper.showAlertDialog(mContext,"Error", "Failed to get category data.");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseCategoryItem> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(mContext, "Koneksi internet bermasalah", Toast.LENGTH_SHORT).show();
+                Helper.showTimeOut(mContext);
+                Log.e("debug", "onFailure: ERROR > " + t.toString());
             }
         });
     }
@@ -284,13 +284,14 @@ public class PostActivity extends AppCompatActivity {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerPlaceSave.setAdapter(adapter);
                 } else {
-                    Toast.makeText(mContext, "Gagal mengambil data tempat pengumpulan", Toast.LENGTH_SHORT).show();
+                    Helper.showAlertDialog(mContext,"Error", "Failed to get place save data.");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponsePlaceSaveItem> call, Throwable t) {
-                Toast.makeText(mContext, "Koneksi internet bermasalah", Toast.LENGTH_SHORT).show();
+                Helper.showTimeOut(mContext);
+                Log.e("debug", "onFailure: ERROR > " + t.toString());
             }
         });
     }
@@ -305,7 +306,7 @@ public class PostActivity extends AppCompatActivity {
                     // permission was granted, do something you want
                 } else {
                     // permission denied
-                    Toast.makeText(mContext, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                    Helper.showAlertDialog(mContext,"Warning", "Permission denied to read your External storage.");
                 }
                 return;
             }
