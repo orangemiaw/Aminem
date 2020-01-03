@@ -81,18 +81,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-<!--        <EditText-->
-<!--            android:id="@+id/et_password"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Password"-->
-<!--            android:textColorHint="#802d2d2d"-->
-<!--            android:inputType="numberPassword"-->
-<!--            android:padding="8dp"-->
-<!--            android:background="@drawable/bg_rectangle_edittext"-->
-<!--            android:textColor="#2d2d2d"/>-->
-
     </LinearLayout>
 
     <Button

@@ -3,6 +3,12 @@
     <string name="welcome">"Welcome !"</string>
 
     <string name="google_maps_key">AIzaSyAAfgcXBOSlcgrsz3RAGE17gCPmVU2SpJE</string>
+    <string name="jawabanSatu">Aminem adalah sebuah aplikasi android yang fungsinya untuk memberikan informasi terkait penemuan barang hilang milik mahasiswa Amikom Yogyakarta.</string>
+    <string name="jawabanDua">Beberapa fitur yang dimiliki Aminem seperti fitur upload, history, search, point, dan reward.</string>
+    <string name="jawabanTiga">Pertama, kalian harus upload foto barang tersebut, sertakan informsi selengkap-lengkapnya.
+        Kedua, pergilah ke pos satpam untuk menyerahkan barang temuan tersebut. Ketiga, dapatkan point. </string>
+    <string name="jawabanEmpat">Buka aplikasi Aminem, pilih icon barang yang ingin dicari atau bisa pilih fitur search untuk mencari barang. kalau barang yang dicari tidak ada, bisa langsung bertanya kepada satpam terdekat. </string>
+    <string name="jawabanLima">Aminem dibuat oleh sebuah tim yang beranggotakan 4 orang. Yaitu ada Imam Kusniadi, Mahmud Zakariya, Bunga Permata dan Tuhfatussalisah</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

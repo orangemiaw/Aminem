@@ -6,7 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fafafa"
+    android:padding="8dp"
     tools:context=".LostItemByCategoryActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/ll_error"
@@ -79,76 +86,5 @@
             android:textAlignment="center"
             android:text="No lost item found in this category."/>
     </LinearLayout>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="10dp">-->
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:id="@+id/cv_status"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:cardCornerRadius="8dp"-->
-<!--            app:cardPreventCornerOverlap="false"-->
-<!--            app:cardBackgroundColor="@color/colorAccent"-->
-<!--            android:minHeight="150dp"-->
-<!--            android:alpha="0.7"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:visibility="gone">-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center_vertical"-->
-<!--                android:gravity="center_vertical">-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="10dp"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:layout_weight="1">-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tv_status_lost"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/colorPrimary"-->
-<!--                        android:paddingLeft="10dp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:textSize="20sp"/>-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tv_status_returned"-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:paddingLeft="10dp"-->
-<!--                        android:textColor="@color/colorPrimaryDark"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:textSize="13sp"/>-->
-
-<!--                </LinearLayout>-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/iv_status_icon"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="140dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:adjustViewBounds="true"-->
-<!--                    android:cropToPadding="true"-->
-<!--                    android:elevation="44dp"-->
-<!--                    android:src="@drawable/ic_key_white" />-->
-<!--            </LinearLayout>-->
-<!--        </androidx.cardview.widget.CardView>-->
-<!--    </LinearLayout>-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
-    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
