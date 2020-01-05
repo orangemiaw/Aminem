@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.xhat.aminem.Adapter.LostItemAdapter;
+import com.xhat.aminem.Adapter.HistoryAdapter;
 import com.xhat.aminem.LoginActivity;
 import com.xhat.aminem.LostItemByCategoryActivity;
 import com.xhat.aminem.LostItemDetailActivity;
@@ -55,10 +55,9 @@ public class HistoryFragment extends Fragment {
     LinearLayout llContent, llError, llEmpty;
 
     private ProgressDialog loading;
-    private ArrayList<String> imageUrl = new ArrayList<>();
 
     private List<AlllostitemItem> alllostitemItemList = new ArrayList<>();
-    private LostItemAdapter lostItemAdapter;
+    private HistoryAdapter historyAdapter;
     private Context mContext;
     private BaseApiService mApiService;
     private SessionManager sessionManager;
@@ -81,7 +80,7 @@ public class HistoryFragment extends Fragment {
         llError = view.findViewById(R.id.ll_error);
         llEmpty = view.findViewById(R.id.ll_empty);
 
-        lostItemAdapter = new LostItemAdapter(mContext, alllostitemItemList);
+        historyAdapter = new HistoryAdapter(mContext, alllostitemItemList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         rvItem.setLayoutManager(mLayoutManager);
         rvItem.setItemAnimator(new DefaultItemAnimator());
@@ -108,8 +107,8 @@ public class HistoryFragment extends Fragment {
                                 llContent.setVisibility(View.VISIBLE);
 
                                 final List<AlllostitemItem> alllostitemItems = response.body().getAlllostitem();
-                                rvItem.setAdapter(new LostItemAdapter(mContext, alllostitemItems));
-                                lostItemAdapter.notifyDataSetChanged();
+                                rvItem.setAdapter(new HistoryAdapter(mContext, alllostitemItems));
+                                historyAdapter.notifyDataSetChanged();
 
                                 initDataIntent(alllostitemItems);
                             }

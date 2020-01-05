@@ -115,7 +115,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 String userId = jsonData.getString("_id");
 
                                 if (userId != null){
-                                    Helper.showAlertDialog(mContext,"Success", "Password has been changed successfully. You must relogin to continue use this app.");
+                                    Helper.showAlertDialog(mContext,"Success", "Password has been changed successfully. For better experience you must relogin to use this app.");
                                 } else {
                                     Helper.showAlertDialog(mContext,"Error", "Change password failed, something when wrong");
                                 }

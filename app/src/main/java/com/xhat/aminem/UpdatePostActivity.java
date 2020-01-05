@@ -1,6 +1,7 @@
 package com.xhat.aminem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +32,10 @@ import com.xhat.aminem.Utils.Constant;
 import com.xhat.aminem.Utils.Helper;
 import com.xhat.aminem.Utils.SessionManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +44,7 @@ public class UpdatePostActivity extends AppCompatActivity {
     ImageView ivItem;
     EditText etNama, etPlaceFound, etDesc;
     Spinner spinnerCategory, spinnerPlaceSave;
-    String itemId;
+    String itemId, itemName, itemDesc, itemFound;
 
     ProgressDialog loading;
     Context mContext;
@@ -70,36 +75,62 @@ public class UpdatePostActivity extends AppCompatActivity {
         spinnerPlaceSave = findViewById(R.id.spinner_place_save);
 
         initSpinnerCategory();
-
-        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "You selected category is " + selectedName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         initSpinnerPlaceSave();
+        lostItemDetail();
 
-        spinnerPlaceSave.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "You selected place save in " + selectedName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View view) {
+                updateItem();
             }
         });
+    }
 
+    private void updateItem() {
+        mApiService.updateItem(sessionManager.getSPToken(), itemId, etNama.getText().toString(), spinnerCategory.getSelectedItem().toString(), etPlaceFound.getText().toString(), spinnerPlaceSave.getSelectedItem().toString(), etDesc.getText().toString())
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()){
+                            loading.dismiss();
+                            try {
+                                JSONObject jsonResults = new JSONObject(response.body().string());
+                                JSONObject jsonData = jsonResults.getJSONObject("data");
+                                String userId = jsonData.getString("_id");
 
+                                if (userId != null){
+                                    Helper.showAlertDialog(mContext,"Success", "Lost item has been changed successfully.");
+                                    startActivity(new Intent(mContext, MainActivity.class));
+                                } else {
+                                    Helper.showAlertDialog(mContext,"Error", "Update lost item failed, something when wrong");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            try {
+                                JSONObject jsonResults = new JSONObject(response.errorBody().string());
+                                String error_message = jsonResults.getString("message");
+                                Helper.showAlertDialog(mContext,"Error", error_message);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            loading.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Helper.showTimeOut(mContext);
+                        Log.e("debug", "onFailure: ERROR > " + t.toString());
+                        loading.dismiss();
+                    }
+                });
     }
 
     private void initSpinnerCategory(){
@@ -161,6 +192,69 @@ public class UpdatePostActivity extends AppCompatActivity {
                 Log.e("debug", "onFailure: ERROR > " + t.toString());
             }
         });
+    }
+
+    private void lostItemDetail() {
+        mApiService.getLostItemDetail(sessionManager.getSPToken(), itemId)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()){
+                            try {
+                                JSONObject jsonResults = new JSONObject(response.body().string());
+                                JSONObject jsonData = jsonResults.getJSONObject("data");
+                                itemName = jsonData.getString("name");
+
+                                if (itemName != null){
+
+                                    itemFound = jsonData.getString("place_found");
+                                    itemDesc = jsonData.getString("description");
+
+                                    etNama.setText(itemName);
+                                    etPlaceFound.setText(itemFound);
+
+                                    if(itemDesc.equals("null")) {
+                                        etDesc.setText("");
+                                    } else {
+                                        etDesc.setText(itemDesc);
+                                    }
+
+                                } else {
+                                    Helper.showAlertDialog(mContext,"Error", "Request failed, something when wrong");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            try {
+                                JSONObject jsonResults = new JSONObject(response.errorBody().string());
+                                String error_message = jsonResults.getString("message");
+                                Integer error_code = jsonResults.getInt("code");
+
+                                Helper.showAlertDialog(mContext,"Error", error_message);
+
+                                if(error_code == 401) {
+                                    Helper.clearSession(mContext);
+                                    startActivity(new Intent(mContext, LoginActivity.class));
+                                    finish();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Helper.showTimeOut(mContext);
+                        Log.e("debug", "onFailure: ERROR > " + t.toString());
+                    }
+                });
     }
 
     @Override

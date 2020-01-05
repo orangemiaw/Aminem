@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostActivity extends AppCompatActivity {
-    Button btnImage, btnPost;
+    Button btnPost;
     ImageView ivItem;
     EditText etNama, etPlaceFound, etDesc;
     Spinner spinnerCategory, spinnerPlaceSave;
@@ -83,7 +83,6 @@ public class PostActivity extends AppCompatActivity {
         mApiService = UtilsApi.getAPIService();
         sessionManager = new SessionManager(mContext);
 
-        btnImage = findViewById(R.id.btn_image);
         btnPost = findViewById(R.id.btn_post);
         ivItem = findViewById(R.id.iv_item);
         etNama = findViewById(R.id.et_nama);
@@ -96,34 +95,7 @@ public class PostActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
         initSpinnerCategory();
-
-        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "You selected category is " + selectedName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         initSpinnerPlaceSave();
-
-        spinnerPlaceSave.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "You selected place save in " + selectedName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +104,7 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        btnImage.setOnClickListener(new View.OnClickListener() {
+        ivItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK,

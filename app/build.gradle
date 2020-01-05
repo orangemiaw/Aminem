@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\Kuliah\\Semester 5\\Android\\aminem.jks')
+            storePassword 'Devil123###'
+            keyAlias = 'key0'
+            keyPassword 'Devil123###'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {

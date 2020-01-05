@@ -1,5 +1,6 @@
 package com.xhat.aminem;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,10 +31,12 @@ import com.xhat.aminem.Utils.FormValidation;
 import com.xhat.aminem.Utils.Helper;
 import com.xhat.aminem.Utils.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
