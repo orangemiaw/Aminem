@@ -16,6 +16,7 @@ Aplikasi ini dibuat dilatar belakangi oleh sering terjadinya kehilangan barang p
 - PhotoView for Zoom In and Zoom Out Image
 - Retrofit 2.0
 - OkHttp
+- Lottie
 
 ## Features
 - Splash Screen
