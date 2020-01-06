@@ -26,6 +26,6 @@ public class SuccessActivity extends AppCompatActivity {
                 // close this activity
                 finish();
             }
-        }, 1800);
+        }, 1600);
     }
 }

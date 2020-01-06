@@ -27,6 +27,6 @@ public class VoucherSuccessActivity extends AppCompatActivity {
                 // close this activity
                 finish();
             }
-        }, 1800);
+        }, 1600);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     }
 }
