@@ -173,8 +173,8 @@ public class PostActivity extends AppCompatActivity {
                                 String itemName = jsonData.getString("name");
 
                                 if (itemName != null){
-                                    Helper.showAlertDialog(mContext,"Success", "Post successfully created.");
-                                    startActivity(new Intent(mContext, MainActivity.class));
+                                    // Helper.showAlertDialog(mContext,"Success", "Post successfully created.");
+                                    startActivity(new Intent(mContext, SuccessActivity.class));
                                 } else {
                                     Helper.showAlertDialog(mContext,"Error", "Failed to create post.");
                                 }

@@ -41,11 +41,13 @@
         android:visibility="gone"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            android:layout_gravity="center"
-            android:src="@drawable/img2" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty"/>
 
         <TextView
             android:textSize="32sp"
@@ -77,11 +79,13 @@
         android:visibility="gone"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            android:layout_gravity="center"
-            android:src="@drawable/img2" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty"/>
 
         <TextView
             android:textSize="32sp"

@@ -50,7 +50,7 @@ import retrofit2.http.Query;
 public class SearchFragment extends Fragment {
     private MenuItem menuItemSearch;
     private RecyclerView rvItem;
-    LinearLayout llError, llEmpty;
+    LinearLayout llError, llEmpty, llDefault;
 
     private ProgressDialog loading;
     private List<AlllostitemItem> alllostitemItemList = new ArrayList<>();
@@ -74,6 +74,7 @@ public class SearchFragment extends Fragment {
         rvItem = view.findViewById(R.id.rv_item);
         llError = view.findViewById(R.id.ll_error);
         llEmpty = view.findViewById(R.id.ll_empty);
+        llDefault = view.findViewById(R.id.ll_default);
 
         lostItemAdapter = new LostItemAdapter(mContext, alllostitemItemList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
@@ -109,6 +110,7 @@ public class SearchFragment extends Fragment {
         ((SearchView) menuItemSearch.getActionView()).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                llDefault.setVisibility(View.GONE);
                 llEmpty.setVisibility(View.GONE);
                 rvItem.setVisibility(View.VISIBLE);
 

@@ -46,8 +46,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:alpha="0.5"
-                    android:src="@drawable/amikom_logo"/>
+                    android:alpha="0.8"
+                    android:src="@drawable/aminem_splash_logo"/>
 
                 <LinearLayout
                     android:layout_marginLeft="8dp"

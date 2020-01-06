@@ -164,8 +164,8 @@ public class VoucherActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
                             loading.dismiss();
-                            Helper.showAlertDialog(mContext,"Success", "Your voucher has been send to your Amikom student email, follow instruction in the email to redem your voucher.");
-                            startActivity(new Intent(mContext, HistoryFragment.class));
+                            // Helper.showAlertDialog(mContext,"Success", "Your voucher has been send to your Amikom student email, follow instruction in the email to redem your voucher.");
+                            startActivity(new Intent(mContext, VoucherSuccessActivity.class));
                         } else {
                             loading.dismiss();
                             try {

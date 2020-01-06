@@ -25,7 +25,9 @@
         android:roundIcon="@drawable/aminem_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdatePostActivity"></activity>
+        <activity android:name=".VoucherSuccessActivity"></activity>
+        <activity android:name=".SuccessActivity" />
+        <activity android:name=".UpdatePostActivity" />
         <activity android:name=".ImageViewActivity" />
 
         <meta-data

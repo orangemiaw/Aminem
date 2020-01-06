@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    tools:context=".VoucherSuccessActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_centerInParent="true"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/success"/>
+
+    <TextView
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#2d2d2d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textAlignment="center"
+        android:text="Success"/>
+
+    <TextView
+        android:id="@+id/success_info"
+        android:textSize="14sp"
+        android:textColor="#2d2d2d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textAlignment="center"
+        android:text="Your voucher has been send to your Amikom student email, follow instruction in the email to redem your voucher."/>
+
+</LinearLayout>

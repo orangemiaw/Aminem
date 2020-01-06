@@ -99,8 +99,8 @@ public class UpdatePostActivity extends AppCompatActivity {
                                 String userId = jsonData.getString("_id");
 
                                 if (userId != null){
-                                    Helper.showAlertDialog(mContext,"Success", "Lost item has been changed successfully.");
-                                    startActivity(new Intent(mContext, MainActivity.class));
+                                    // Helper.showAlertDialog(mContext,"Success", "Lost item has been changed successfully.");
+                                    startActivity(new Intent(mContext, SuccessActivity.class));
                                 } else {
                                     Helper.showAlertDialog(mContext,"Error", "Update lost item failed, something when wrong");
                                 }

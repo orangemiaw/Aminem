@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f7f7f7"
     android:padding="8dp"
     tools:context=".Fragment.SearchFragment">
 
@@ -21,11 +23,13 @@
         android:visibility="gone"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            android:layout_gravity="center"
-            android:src="@drawable/img2" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty"/>
 
         <TextView
             android:textSize="32sp"
@@ -43,8 +47,8 @@
             android:textColor="#2d2d2d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:textAlignment="center"
             android:text="Failed to get data from server for some reason."/>
     </LinearLayout>
@@ -54,13 +58,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            android:layout_gravity="center"
-            android:src="@drawable/img2" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty"/>
 
         <TextView
             android:textSize="32sp"
@@ -78,10 +85,47 @@
             android:textColor="#2d2d2d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textAlignment="center"
+            android:text="No search item found, you can click search icon on top navigation to research what you want."/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_default"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty"/>
+
+        <TextView
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#2d2d2d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textAlignment="center"
-            android:text="No search item found, you can click search icon on top navigation to research what you want."/>
+            android:text="Lost an Item?"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#2d2d2d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textAlignment="center"
+            android:text="If you lost an item and want to search your item, you can click search icon on top navigation to search your item by name, place found, place save, or description."/>
     </LinearLayout>
 
 </FrameLayout>

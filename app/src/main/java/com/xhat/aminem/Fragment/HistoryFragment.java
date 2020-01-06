@@ -35,6 +35,7 @@ import com.xhat.aminem.Model.AlllostitemItem;
 import com.xhat.aminem.Model.ResponseLostItem;
 import com.xhat.aminem.Module.GlideApp;
 import com.xhat.aminem.R;
+import com.xhat.aminem.SuccessActivity;
 import com.xhat.aminem.UpdatePostActivity;
 import com.xhat.aminem.Utils.Api.BaseApiService;
 import com.xhat.aminem.Utils.Api.UtilsApi;
@@ -183,8 +184,8 @@ public class HistoryFragment extends Fragment {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
                             loading.dismiss();
-                            Helper.showAlertDialog(mContext,"Success", "Post has been deleted.");
-                            startActivity(new Intent(mContext, MainActivity.class));
+                            // Helper.showAlertDialog(mContext,"Success", "Post has been deleted.");
+                            startActivity(new Intent(mContext, SuccessActivity.class));
                         } else {
                             loading.dismiss();
                             try {
