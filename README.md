@@ -14,9 +14,9 @@ Aplikasi ini dibuat dilatar belakangi oleh sering terjadinya kehilangan barang p
 - Bitmap for Selected Image Upload
 - Firebase Cloud Messanging for Notification
 - PhotoView for Zoom In and Zoom Out Image
-- Retrofit 2.0
-- OkHttp
-- Lottie
+- Lottie for Animation
+- Retrofit 2.0 for RESTful API Handler
+- OkHttp for HTTP Internet Reqiuest
 
 ## Features
 - Splash Screen
@@ -50,7 +50,6 @@ Aplikasi ini dibuat dilatar belakangi oleh sering terjadinya kehilangan barang p
 ![Screenshot 5](screenshot/screenshot5.JPG)
 
 ## Active Bugs
-- Infinite RecyleView still not work (fix soon)
-- Need to change UI/UX in change password (need some improvement)
+- Need to change UI/UX for more powerful user experience
 
 **Masih banyak bug, ya maap - maap saja ya hehe :) Namnya juga lagi belajar satu semester doang**
