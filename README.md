@@ -7,6 +7,10 @@ Aplikasi mempunyai 6 kategori barang hilang yaitu Kartu Identitas, Dompet, Dokum
 
 Aplikasi ini dibuat dilatar belakangi oleh sering terjadinya kehilangan barang pada mahasiswa Amikom. Sehingga diharapkan dengan aplikasi ini dapat memudahkan mahasiswa Amikom untuk melaporkan penemuan barang dan pencarian barang hilang.
 
+### Donate
+- Jika proyek ini sangat membantu anda untuk pengembangan aplikasi dan anda ingin mendukung saya, Anda dapat memberi saya secangkir kopi :)
+- [![Donation](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://blockchain.info/id/address/1EKgiVqAvMnenGwuV8yvkvzfgMPUx18VBH)
+
 ## Arsitektur & Plugins
 - REST API (http://indiarkmedia.com/api/v1)
 - Google Maps Service
@@ -49,7 +53,6 @@ Aplikasi ini dibuat dilatar belakangi oleh sering terjadinya kehilangan barang p
 ![Screenshot 4](screenshot/screenshot4.JPG)
 ![Screenshot 5](screenshot/screenshot5.JPG)
 
-## Active Bugs
-- Need to change UI/UX for more powerful user experience
+## Disclaimer
 
-**Masih banyak bug, ya maap - maap saja ya hehe :) Namnya juga lagi belajar satu semester doang**
+***Note: modifications, changes, or alterations to this sourcecode is acceptable, however,any public releases utilizing this code must be approved by writen this application.***
