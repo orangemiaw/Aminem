@@ -1,4 +1,8 @@
 # Aminem - Amikom Nemu Mobile Application
+
+[![Version](https://img.shields.io/badge/Version-1.0-brightgreen.svg?maxAge=259200)]()
+[![Stage](https://img.shields.io/badge/Release-Beta-orange.svg)]()
+
 Aminem atau Amikom Nemu adalah sebuah aplikasi android yang berfungsi untuk memberikan informasi terkait penemuan barang hilang yang ada disekitaran kampus Universitas AMIKOM Yogyakarta. Aplikasi ini memiliki fitur seperti upload, history, search, point dan reward.
 
 Aplikasi ini dikususkan untuk mahasiswa Amikom untuk melakukan pelaporan penemuan barang dan juga dapat melakukan pencarian barang yang hilang dengan fitur search. Untuk menggunakan aplikasi ini hanya perlu login dengan menggunakan akun mhs.amikom.ac.id dalam artian hanya perlu memasukan NIM dan Passwordnya. 
