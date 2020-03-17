@@ -11,6 +11,9 @@ Aplikasi mempunyai 6 kategori barang hilang yaitu Kartu Identitas, Dompet, Dokum
 
 Aplikasi ini dibuat dilatar belakangi oleh sering terjadinya kehilangan barang pada mahasiswa Amikom. Sehingga diharapkan dengan aplikasi ini dapat memudahkan mahasiswa Amikom untuk melaporkan penemuan barang dan pencarian barang hilang.
 
+### Download at Play Store
+https://play.google.com/store/apps/details?id=com.xhat.aminem
+
 ### Donate
 - Jika proyek ini sangat membantu anda untuk pengembangan aplikasi dan anda ingin mendukung saya, Anda dapat memberi saya secangkir kopi :)
 - [![Donation](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://blockchain.info/id/address/1EKgiVqAvMnenGwuV8yvkvzfgMPUx18VBH)
